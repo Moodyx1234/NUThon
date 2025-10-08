@@ -653,35 +653,32 @@
         function toggleAccordion(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('.accordion-icon');
-            
-            // إغلاق البقية
-            document.querySelectorAll('.accordion-header').forEach((header) => {
-                const otherContent = header.nextElementSibling;
-                const otherIcon = header.querySelector('.accordion-icon');
-                if (header !== button) {
-                    header.classList.remove('active');
-                    otherContent.style.maxHeight = null;
-                    if(otherIcon) otherIcon.classList.remove('rotate-180');
-                    otherContent.style.paddingTop = '0';
-                }
-            });
-            
-            // فتح أو إغلاق الحالي
-            button.classList.toggle('active');
-
-            if (content.style.maxHeight) {
-                // إغلاق
-                content.style.maxHeight = null;
-                content.style.paddingTop = '0';
-                if(icon) icon.classList.remove('rotate-180');
-            } 
-            else {
-                // فتح
-                content.style.maxHeight = content.scrollHeight + 'px';
-                content.style.paddingTop = '1rem';
-                if(icon) icon.classList.add('rotate-180');
+  
+        // إغلاق البقية
+        document.querySelectorAll('.accordion-content').forEach((el) => {
+            if (el !== content) {
+                el.style.maxHeight = null;
+                el.classList.remove('open');
             }
+        });
+
+        document.querySelectorAll('.accordion-icon').forEach((ic) => {
+            if (ic !== icon) ic.classList.remove('rotate-180');
+        });
+
+        // فتح أو إغلاق الحالي
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            content.classList.remove('open');
+            icon.classList.remove('rotate-180');
+        } 
+        else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.classList.add('open');
+            icon.classList.add('rotate-180');
         }
+    }
+
 
 
         // Initial setup
