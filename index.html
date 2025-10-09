@@ -815,10 +815,7 @@
         <!-- Footer for Landing View -->
         <footer id="landing-footer" class="bg-gray-900 text-white py-8">
             <div class="container mx-auto px-4 text-center text-sm">
-                <!-- Visit Counter Display -->
-                <p class="text-gray-400 mb-2">
-                    العدد الكلي للزوار: <span id="visit-count" class="font-bold text-emerald-400">Loading...</span>
-                </p>
+                <!-- VISIT COUNTER REMOVED -->
                 <p>&copy; 2025 الماراثون العلمي الطلابي. جميع الحقوق محفوظة.</p>
                 <div class="grid grid-cols-2 lg:grid-cols-10 gap-x-2 gap-y-1 mt-2 mx-auto max-w-lg lg:max-w-full">
                     <a href="#tracks" onclick="internalScroll('tracks')" class="text-gray-400 hover:text-white">المسارات</a>
@@ -880,64 +877,7 @@
                 createDigitBox(seconds, 'ثانية');
         }
 
-        // NEW FUNCTION: Global Visit Counter using a different external service (hit-counter/simple)
-        function updateGlobalVisitCounter() {
-            const counterElement = document.getElementById('visit-count');
-            // Using a generic namespace key. For a truly unique and persistent counter, 
-            // you might register your own key on a service like https://hit-counter.vercel.app/ or similar.
-            const uniqueKey = 'najran-marathon-ssm'; 
-            const apiUrl = `https://hit-counter.vercel.app/counter?id=${uniqueKey}&key=visits`;
-
-            if (!counterElement) return;
-            counterElement.textContent = 'جاري التحميل...'; // Show loading state
-
-            // Check if user has already hit the API in this session to prevent multiple counts per session load
-            if (sessionStorage.getItem('marathonSessionVisited') !== 'true') {
-                // First: Hit the counter (Increment + Get)
-                fetch(apiUrl + '&view=true', { method: 'POST' }) 
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.views !== undefined) {
-                            counterElement.textContent = data.views.toLocaleString('en-US'); 
-                            sessionStorage.setItem('marathonSessionVisited', 'true');
-                        } else {
-                            counterElement.textContent = 'فشل في الاتصال';
-                            console.error('Hit counter failed to return views data:', data);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error hitting counter:', error);
-                        // If hitting fails, try to just get the value without incrementing
-                        fetch(apiUrl)
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data && data.views !== undefined) {
-                                    counterElement.textContent = data.views.toLocaleString('en-US');
-                                } else {
-                                    counterElement.textContent = 'فشل في الاتصال';
-                                }
-                            })
-                            .catch(e => {
-                                counterElement.textContent = 'فشل في الاتصال';
-                            });
-                    });
-            } else {
-                // If already visited this session, just retrieve the current value
-                fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.views !== undefined) {
-                            counterElement.textContent = data.views.toLocaleString('en-US');
-                        } else {
-                            counterElement.textContent = 'فشل في الاتصال';
-                        }
-                    })
-                    .catch(e => {
-                        counterElement.textContent = 'فشل في الاتصال';
-                    });
-            }
-        }
-
+        // REMOVED: updateGlobalVisitCounter function
 
         // Function to toggle the mobile menu dropdown
         function toggleMobileDropdown() {
@@ -1023,8 +963,7 @@
             // Run the countdown immediately and then every second
             updateCountdown();
             setInterval(updateCountdown, 1000);
-            // Initialize the global visit counter
-            updateGlobalVisitCounter();
+            // REMOVED: updateGlobalVisitCounter();
         });
 
     </script>
