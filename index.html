@@ -117,9 +117,21 @@
         }
 
         /* Custom Grid Ordering for Rewards Section */
+        /* Desktop/iPad: 2nd, 1st, 3rd */
         @media (min-width: 768px) {
             .reward-1st { order: 2; }
             .reward-2nd { order: 1; }
+            .reward-3rd { order: 3; }
+            /* Judge layout adjustment for clarity */
+            .judge-group-title {
+                text-align: center !important;
+                width: 100%;
+            }
+        }
+        /* Mobile: 1st, 2nd, 3rd (default column stack order) */
+        @media (max-width: 767px) {
+            .reward-1st { order: 1; }
+            .reward-2nd { order: 2; }
             .reward-3rd { order: 3; }
         }
 
@@ -134,9 +146,66 @@
             padding-bottom: 3rem; /* Extra padding to look taller */
             transform: scale(1.05);
         }
+
+        /* Off-Canvas Menu Styles */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden off-screen initially */
+            width: 300px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease-in-out;
+            z-index: 60;
+        }
+        #mobile-menu.open {
+            right: 0;
+        }
+        #mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 55;
+            display: none;
+        }
+        #mobile-menu-overlay.visible {
+            display: block;
+        }
     </style>
 </head>
 <body class="scroll-smooth">
+
+    <!-- Off-Canvas Mobile Menu -->
+    <div id="mobile-menu-overlay" class="lg:hidden" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-menu" class="lg:hidden">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h3 class="text-xl font-bold text-blue-700">قائمة التنقل</h3>
+            <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-red-500 transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col p-4 space-y-2">
+            <a href="#tracks" onclick="internalScroll('tracks'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">المسارات</a>
+            <a href="#rewards" onclick="internalScroll('rewards'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">الجوائز</a>
+            <a href="#criteria" onclick="internalScroll('criteria'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">معايير التحكيم</a>
+            <a href="#judges" onclick="internalScroll('judges'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">لجنة التحكيم</a>
+            <a href="#schedule" onclick="internalScroll('schedule'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">البرنامج الزمني</a>
+            <a href="#terms" onclick="internalScroll('terms'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">الشروط</a>
+            <a href="#partners" onclick="internalScroll('partners'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">الشركاء</a> 
+            <a href="#faq" onclick="internalScroll('faq'); toggleMobileMenu();" class="text-gray-700 hover:bg-gray-100 p-2 rounded-md">الأسئلة الشائعة</a>
+        </nav>
+        <div class="p-4 pt-6">
+             <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=FWtNse63V0m7FLYQoZOkEBxTTWEyxtFLt5CN3QkrNQlUNUJKOUZQMEg3V0JFVU9ZOU1JVjM3SVdHUC4u" target="_blank" class="block text-center px-5 py-2 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition shadow-lg">
+                سجل الآن
+            </a>
+        </div>
+    </div>
+    <!-- End Off-Canvas Mobile Menu -->
+
 
     <!-- Header & Navigation (Improved layout and centering) -->
     <header id="main-header" class="bg-white shadow-lg sticky top-0 z-50">
@@ -148,14 +217,17 @@
                 <!-- Marathon Logo (Event Brand) - Corrected relative path for self-contained file -->
                 <a href="#" class="flex items-center">
                     <!-- Placeholder image path updated for GitHub pages -->
-                    <img src="marathon_logo.jpg" alt="شعار الماراثون العلمي الطلابي" class="h-16 w-auto rounded-full shadow-md">
+                    <img src="marathon_logo.png" alt="شعار الماراثون العلمي الطلابي" class="h-16 w-auto rounded-full shadow-md">
                 </a>
 
-                <!-- Main Title (Removed from Navbar as requested) -->
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition absolute left-0 ml-4">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
             </div>
 
-            <!-- 2. Navigation Links (Center on Desktop, Hidden on Mobile) -->
-            <nav id="landing-nav" class="hidden lg:flex space-x-4 space-x-reverse text-lg font-medium absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+            <!-- 2. Navigation Links (Center on Desktop, Hidden on Mobile) - Fixed Overlap -->
+            <nav id="landing-nav" class="hidden lg:flex space-x-4 space-x-reverse text-lg font-medium absolute left-1/2 transform -translate-x-1/2">
                 <a href="#tracks" onclick="internalScroll('tracks')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">المسارات</a>
                 <a href="#rewards" onclick="internalScroll('rewards')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">الجوائز</a>
                 <a href="#criteria" onclick="internalScroll('criteria')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">معايير التحكيم</a>
@@ -166,12 +238,11 @@
                 <a href="#faq" onclick="internalScroll('faq')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">الأسئلة الشائعة</a>
             </nav>
             
-            <!-- 3. Registration Button (Left Side) -->
-            <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=FWtNse63V0m7FLYQoZOkEBxTTWEyxtFLt5CN3QkrNQlUNUJKOUZQMEg3V0JFVU9ZOU1JVjM3SVdHUC4u" target="_blank" class="px-5 py-2 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition shadow-lg shadow-blue-500/50 text-sm md:text-base">
+            <!-- 3. Registration Button (Left Side - Desktop Only) -->
+            <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=FWtNse63V0m7FLYQoZOkEBxTTWEyxtFLt5CN3QkrNQlUNUJKOUZQMEg3V0JFVU9ZOU1JVjM3SVdHUC4u" target="_blank" class="hidden lg:block px-5 py-2 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition shadow-lg shadow-blue-500/50 text-sm md:text-base">
                 سجل الآن
             </a>
             
-            <!-- Mobile Title (Hidden as it's now part of the logos group) -->
         </div>
     </header>
 
@@ -251,20 +322,11 @@
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12">الجوائز والمكافآت</h3>
 
                 <!-- Using grid for responsive layout and custom order on desktop -->
+                <!-- Mobile/iPad Order: 1st, 2nd, 3rd (via CSS) -->
+                <!-- Desktop Order: 2nd, 1st, 3rd (via CSS) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center items-end">
                     
-                    <!-- Reward 2nd Place (Silver) - Positioned LEFT on desktop (order 1) -->
-                    <div class="reward-2nd reward-card bg-white p-8 rounded-2xl shadow-xl transition duration-300 border-2 border-gray-400">
-                        <!-- Trophy Icon 2nd Place -->
-                        <i data-lucide="trophy" class="w-12 h-12 text-gray-500 mx-auto mb-4 fill-gray-400 stroke-2"></i>
-                        <div>
-                            <h4 class="text-3xl font-extrabold text-gray-900 mb-2">المركز الثاني</h4>
-                            <p class="text-lg text-gray-600 mb-4">جائزة مالية متوسطة + شهادات تقدير معتمدة.</p>
-                            <span class="text-4xl font-mono text-gray-600">SAR XXXX</span>
-                        </div>
-                    </div>
-
-                    <!-- Reward 1st Place (Gold) - Positioned CENTER on desktop (order 2) -->
+                    <!-- Reward 1st Place (Gold) - Order 1 on Mobile, Order 2 on Desktop (via CSS) -->
                     <div class="reward-1st reward-card bg-white p-8 rounded-2xl shadow-2xl transition duration-300 border-4 border-yellow-500 relative z-10">
                         <!-- Trophy Icon 1st Place - Larger Size -->
                         <i data-lucide="trophy" class="w-16 h-16 text-yellow-500 mx-auto mb-4 fill-yellow-500 stroke-2"></i>
@@ -274,8 +336,19 @@
                             <span class="text-4xl font-mono text-yellow-600">SAR XXXX</span>
                         </div>
                     </div>
+
+                    <!-- Reward 2nd Place (Silver) - Order 2 on Mobile, Order 1 on Desktop (via CSS) -->
+                    <div class="reward-2nd reward-card bg-white p-8 rounded-2xl shadow-xl transition duration-300 border-2 border-gray-400">
+                        <!-- Trophy Icon 2nd Place -->
+                        <i data-lucide="trophy" class="w-12 h-12 text-gray-500 mx-auto mb-4 fill-gray-400 stroke-2"></i>
+                        <div>
+                            <h4 class="text-3xl font-extrabold text-gray-900 mb-2">المركز الثاني</h4>
+                            <p class="text-lg text-gray-600 mb-4">جائزة مالية متوسطة + شهادات تقدير معتمدة.</p>
+                            <span class="text-4xl font-mono text-gray-600">SAR XXXX</span>
+                        </div>
+                    </div>
                     
-                    <!-- Reward 3rd Place (Bronze) - Positioned RIGHT on desktop (order 3) -->
+                    <!-- Reward 3rd Place (Bronze) - Order 3 on Mobile, Order 3 on Desktop (via CSS) -->
                     <div class="reward-3rd reward-card bg-white p-8 rounded-2xl shadow-xl transition duration-300 border-2 border-orange-500">
                         <!-- Trophy Icon 3rd Place -->
                         <i data-lucide="trophy" class="w-12 h-12 text-orange-600 mx-auto mb-4 fill-orange-500 stroke-2"></i>
@@ -339,7 +412,7 @@
             </div>
         </section>
 
-        <!-- NEW: Judges Section (لجنة التحكيم) - NAMES REMOVED -->
+        <!-- NEW: Judges Section (لجنة التحكيم) - NAMES REMOVED, Mobile titles fixed -->
         <section id="judges" class="py-16 md:py-24 bg-gray-100">
             <div class="container mx-auto px-4 max-w-5xl">
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12">لجنة التحكيم</h3>
@@ -349,7 +422,8 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 text-center">
                     
                     <!-- GROUP 1: Health Track Judges (الصحي) -->
-                    <div class="lg:col-span-3 text-2xl font-bold text-blue-700 mt-4 mb-4 border-b pb-2">محكمو المسار الصحي</div>
+                    <!-- Title spans all columns and is centered on mobile/desktop -->
+                    <div class="col-span-2 sm:col-span-3 lg:col-span-3 text-2xl font-bold text-blue-700 mt-4 mb-4 border-b pb-2 judge-group-title">محكمو المسار الصحي</div>
                     
                     <!-- Judge H1 (Health) -->
                     <div class="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition">
@@ -376,7 +450,7 @@
                     </div>
 
                     <!-- GROUP 2: Engineering & Technology Judges (الهندسي والتقني) -->
-                    <div class="lg:col-span-3 text-2xl font-bold text-blue-700 mt-8 mb-4 border-b pb-2">محكمو المسار الهندسي والتقني</div>
+                    <div class="col-span-2 sm:col-span-3 lg:col-span-3 text-2xl font-bold text-blue-700 mt-8 mb-4 border-b pb-2 judge-group-title">محكمو المسار الهندسي والتقني</div>
 
                     <!-- Judge ET1 (Tech) -->
                     <div class="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition">
@@ -403,7 +477,7 @@
                     </div>
 
                     <!-- GROUP 3: Humanities & Science Judges (الإنساني والعلمي) -->
-                    <div class="lg:col-span-3 text-2xl font-bold text-blue-700 mt-8 mb-4 border-b pb-2">محكمو المسار الإنساني والعلمي</div>
+                    <div class="col-span-2 sm:col-span-3 lg:col-span-3 text-2xl font-bold text-blue-700 mt-8 mb-4 border-b pb-2 judge-group-title">محكمو المسار الإنساني والعلمي</div>
                     
                     <!-- Judge HS1 (Humanities) -->
                     <div class="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition">
@@ -780,6 +854,21 @@
                 }
                 localStorage.setItem('marathonVisitCount', visitCount);
                 counterElement.textContent = `${visitCount}`;
+            }
+        }
+
+        // Function to toggle the mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            if (menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                overlay.classList.remove('visible');
+                document.body.style.overflow = ''; // Restore scrolling
+            } else {
+                menu.classList.add('open');
+                overlay.classList.add('visible');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
             }
         }
 
