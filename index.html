@@ -26,6 +26,7 @@
         }
 
         /* Custom utility for smooth scrolling to sections (only for internal links on landing page) */
+        /* NOTE: The 'scroll-behavior: smooth' on body handles general smooth scroll */
         .scroll-smooth {
             scroll-behavior: smooth;
         }
@@ -147,11 +148,11 @@
             transform: scale(1.05);
         }
 
-        /* Dropdown Menu Styles for Mobile */
+        /* Dropdown Menu Styles for Mobile - ADDED TRANSITION */
         #mobile-nav-dropdown {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out;
+            transition: max-height 0.4s ease-in-out; /* Adjusted transition for smooth drop-down */
             background-color: var(--color-primary); /* Dark Blue background */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -188,16 +189,16 @@
                 </a>
             </div>
 
-            <!-- 2. Navigation Links (Center on Desktop, Hidden on Mobile) -->
-            <nav id="landing-nav" class="hidden lg:flex space-x-4 space-x-reverse text-lg font-medium absolute left-1/2 transform -translate-x-1/2">
-                <a href="#tracks" onclick="internalScroll('tracks')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">المسارات</a>
-                <a href="#rewards" onclick="internalScroll('rewards')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">الجوائز</a>
-                <a href="#criteria" onclick="internalScroll('criteria')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">المعايير</a>
-                <a href="#judges" onclick="internalScroll('judges')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">لجنة التحكيم</a>
-                <a href="#schedule" onclick="internalScroll('schedule')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">البرنامج الزمني</a>
-                <a href="#terms" onclick="internalScroll('terms')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">الشروط</a>
-                <a href="#partners" onclick="internalScroll('partners')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">الشركاء</a> 
-                <a href="#faq" onclick="internalScroll('faq')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2">الأسئلة الشائعة</a>
+            <!-- 2. Navigation Links (Center on Desktop, Hidden on Mobile) - IMPROVED SPACING FOR SINGLE ROW -->
+            <nav id="landing-nav" class="hidden lg:flex space-x-3 space-x-reverse lg:space-x-4 text-base font-medium absolute left-1/2 transform -translate-x-1/2">
+                <a href="#tracks" onclick="internalScroll('tracks')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">المسارات</a>
+                <a href="#rewards" onclick="internalScroll('rewards')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الجوائز</a>
+                <a href="#criteria" onclick="internalScroll('criteria')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">المعايير</a>
+                <a href="#judges" onclick="internalScroll('judges')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">لجنة التحكيم</a>
+                <a href="#schedule" onclick="internalScroll('schedule')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">البرنامج الزمني</a>
+                <a href="#terms" onclick="internalScroll('terms')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الشروط</a>
+                <a href="#partners" onclick="internalScroll('partners')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الشركاء</a> 
+                <a href="#faq" onclick="internalScroll('faq')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الأسئلة الشائعة</a>
             </nav>
             
             <!-- 3. Registration Button (Left Side - Desktop Only) -->
@@ -850,10 +851,12 @@
             if (element) {
                 // Get the offset to account for the fixed header height
                 const headerHeight = document.getElementById('main-header').offsetHeight;
+                
                 // Use getBoundingClientRect().top for relative position to viewport.
-                // Scroll by adding current scroll position (pageYOffset) to the element's position relative to the viewport, 
-                // and subtracting the header height and some extra padding (20px).
-                const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight;
+                // Scroll to the element's position relative to the document top (window.pageYOffset + element.getBoundingClientRect().top)
+                // and subtract the header height (plus a small margin/padding of 20px)
+                const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight - 20; 
+                
                 window.scrollTo({
                     top: topPosition,
                     behavior: 'smooth' // This ensures the dynamic scrolling animation
