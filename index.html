@@ -850,11 +850,19 @@
             if (element) {
                 // Get the offset to account for the fixed header height
                 const headerHeight = document.getElementById('main-header').offsetHeight;
-                const topPosition = element.offsetTop - headerHeight - 20; // 20px extra padding
+                // Use getBoundingClientRect().top for relative position to viewport.
+                // Scroll by adding current scroll position (pageYOffset) to the element's position relative to the viewport, 
+                // and subtracting the header height and some extra padding (20px).
+                const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight;
                 window.scrollTo({
                     top: topPosition,
-                    behavior: 'smooth'
+                    behavior: 'smooth' // This ensures the dynamic scrolling animation
                 });
+            }
+            // Close mobile menu after clicking a link
+            const dropdown = document.getElementById('mobile-nav-dropdown');
+            if (dropdown.classList.contains('open')) {
+                toggleMobileDropdown();
             }
         }
         
