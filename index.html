@@ -185,7 +185,7 @@
                 
                 <!-- Marathon Logo (Event Brand) -->
                 <a href="#" class="flex items-center">
-                    <img src="marathon_logo.png" alt="شعار الماراثون العلمي الطلابي" class="h-16 w-auto rounded-full shadow-md">
+                    <img src="marathon_logo.jpg" alt="شعار الماراثون العلمي الطلابي" class="h-16 w-auto rounded-full shadow-md">
                 </a>
             </div>
 
@@ -854,8 +854,9 @@
                 
                 // Use getBoundingClientRect().top for relative position to viewport.
                 // Scroll to the element's position relative to the document top (window.pageYOffset + element.getBoundingClientRect().top)
-                // and subtract the header height (plus increased padding of 90px to show content clearly below the navbar)
-                const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight - 90; 
+                // and subtract the header height (plus temporary padding of 20px)
+                // NOTE: Changed back to -20px to improve mobile precision.
+                const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight - 20; 
                 
                 window.scrollTo({
                     top: topPosition,
