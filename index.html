@@ -213,6 +213,8 @@
                 <a href="#judges" onclick="internalScroll('judges')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">لجنة التحكيم</a>
                 <a href="#schedule" onclick="internalScroll('schedule')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">البرنامج الزمني</a>
                 <a href="#workshops" onclick="internalScroll('workshops')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">ورش العمل</a>
+                <!-- NEW: Team Formation Link -->
+                <a href="#team-formation-link" target="_blank" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">تكوين الفرق</a>
                 <a href="#terms" onclick="internalScroll('terms')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الشروط</a>
                 <a href="#partners" onclick="internalScroll('partners')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الشركاء</a> 
                 <a href="#faq" onclick="internalScroll('faq')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap">الأسئلة الشائعة</a>
@@ -236,6 +238,8 @@
             <a href="#judges" onclick="internalScroll('judges'); toggleMobileDropdown();">لجنة التحكيم</a>
             <a href="#schedule" onclick="internalScroll('schedule'); toggleMobileDropdown();">البرنامج الزمني</a>
             <a href="#workshops" onclick="internalScroll('workshops'); toggleMobileDropdown();">ورش العمل</a>
+            <!-- NEW: Team Formation Link for Mobile -->
+            <a href="#team-formation-link" target="_blank" onclick="toggleMobileDropdown();">تكوين الفرق</a>
             <a href="#terms" onclick="internalScroll('terms'); toggleMobileDropdown();">الشروط والأحكام</a>
             <a href="#partners" onclick="internalScroll('partners'); toggleMobileDropdown();">الشركاء</a> 
             <a href="#faq" onclick="internalScroll('faq'); toggleMobileDropdown();">الأسئلة الشائعة</a>
@@ -791,18 +795,18 @@
             </div>
         </section>
         
-        <!-- WhatsApp Contact Button (New Section) -->
+        <!-- NEW: Telegram Contact Button (Replaced WhatsApp) -->
         <section class="py-12 bg-blue-700">
             <div class="container mx-auto px-4 text-center">
-                <h3 class="text-2xl font-bold text-white mb-6">هل لديك استفسار إضافي؟</h3>
-                <!-- WhatsApp Link: +966530773087 -->
+                <h3 class="text-2xl font-bold text-white mb-6">للتواصل والإعلان</h3>
+                <!-- Telegram Link: https://t.me/+zBdxsQTGhn8zY2Q0 -->
                 <a 
-                    href="https://wa.me/966530773087?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%2C%20%D9%84%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D9%85%D8%A7%D8%B1%D8%A7%D8%AB%D9%88%D9%86%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A%20%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8%D9%8A."
+                    href="https://t.me/+zBdxsQTGhn8zY2Q0"
                     target="_blank"
-                    class="inline-flex items-center space-x-2 space-x-reverse px-8 py-3 text-white font-bold rounded-full whatsapp-btn shadow-lg"
+                    class="inline-flex items-center space-x-2 space-x-reverse px-8 py-3 bg-white text-blue-700 font-bold rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
                 >
-                    <i data-lucide="message-square" class="w-6 h-6"></i>
-                    <span>تواصل معنا عبر واتساب</span>
+                    <i data-lucide="send" class="w-6 h-6"></i>
+                    <span>للتواصل والإعلان عبر التليجرام</span>
                 </a>
             </div>
         </section>
@@ -816,13 +820,15 @@
                     أنت الزائر رقم: <span id="visit-count" class="font-bold text-emerald-400">1</span>
                 </p>
                 <p>&copy; 2025 الماراثون العلمي الطلابي. جميع الحقوق محفوظة.</p>
-                <div class="grid grid-cols-2 lg:grid-cols-9 gap-x-2 gap-y-1 mt-2 mx-auto max-w-lg lg:max-w-full">
+                <div class="grid grid-cols-2 lg:grid-cols-10 gap-x-2 gap-y-1 mt-2 mx-auto max-w-lg lg:max-w-full">
                     <a href="#tracks" onclick="internalScroll('tracks')" class="text-gray-400 hover:text-white">المسارات</a>
                     <a href="#rewards" onclick="internalScroll('rewards')" class="text-gray-400 hover:text-white">الجوائز</a>
                     <a href="#criteria" onclick="internalScroll('criteria')" class="text-gray-400 hover:text-white">المعايير</a>
                     <a href="#judges" onclick="internalScroll('judges')" class="text-gray-400 hover:text-white">لجنة التحكيم</a>
                     <a href="#schedule" onclick="internalScroll('schedule')" class="text-gray-400 hover:text-white">البرنامج الزمني</a>
                     <a href="#workshops" onclick="internalScroll('workshops')" class="text-gray-400 hover:text-white">ورش العمل</a>
+                    <!-- NEW: Team Formation Link in Footer -->
+                    <a href="#team-formation-link" target="_blank" class="text-gray-400 hover:text-white">تكوين الفرق</a>
                     <a href="#terms" onclick="internalScroll('terms')" class="text-gray-400 hover:text-white">الشروط والأحكام</a>
                     <a href="#partners" onclick="internalScroll('partners')" class="text-gray-400 hover:text-white">الشركاء</a>
                     <a href="#faq" onclick="internalScroll('faq')" class="text-gray-400 hover:text-white">الأسئلة الشائعة</a>
