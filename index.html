@@ -34,8 +34,8 @@
             /* الزينة النقطية التي طلبتها (بدون تأثير على المحتوى) */
             background-image: 
                 /* GLOBAL OPACITY REDUCED FOR SUBTLETY (rgba(15, 23, 42, 0.05)) */
-                linear-gradient(0deg, transparent 9px, rgba(15, 23, 42, 0.05) 10px, transparent 11px), 
-                linear-gradient(90deg, transparent 9px, rgba(15, 23, 42, 0.05) 10px, transparent 11px);
+                linear-gradient(0deg, transparent 9px, rgba(15, 23, 42, 0.03) 10px, transparent 11px), 
+                linear-gradient(90deg, transparent 9px, rgba(15, 23, 42, 0.03) 10px, transparent 11px);
             background-size: 50px 50px; 
             /* تم حذف خاصية الثبات (fixed) لجعل الخلفية تتحرك مع التمرير */
             /* background-attachment: fixed; */
@@ -46,8 +46,8 @@
             body {
                 /* Reduced opacity slightly for better blending on desktop too */
                 background-image: 
-                    linear-gradient(0deg, transparent 9px, rgba(15, 23, 42, 0.08) 10px, transparent 11px), 
-                    linear-gradient(90deg, transparent 9px, rgba(15, 23, 42, 0.08) 10px, transparent 11px);
+                    linear-gradient(0deg, transparent 9px, rgba(15, 23, 42, 0.05) 10px, transparent 11px), 
+                    linear-gradient(90deg, transparent 9px, rgba(15, 23, 42, 0.05) 10px, transparent 11px);
             }
         }
 
@@ -183,6 +183,13 @@
 
         /* Dropdown Menu Styles for Mobile - ADDED TRANSITION */
         #mobile-nav-dropdown {
+            /* NEW: Absolute positioning to overlay content */
+            position: absolute; 
+            top: 100%; /* Position right below the header */
+            left: 0;
+            width: 100%; /* Full width */
+            z-index: 45; /* Below sticky header, above content */
+            
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-in-out; 
@@ -1147,7 +1154,7 @@
             if (content.style.maxHeight) {
                 // إغلاق
                 content.style.maxHeight = null;
-                // Removed paddingTop reset as the padding is now controlled by the <p> class pb-4
+                // Removed paddingTop set as the padding is now controlled by the <p> class pb-4
                 if(icon) icon.classList.remove('rotate-180');
             } 
             else {
