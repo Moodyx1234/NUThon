@@ -76,12 +76,26 @@
 
 
         /* 🧬 Canvas خلفية الذرات المترابطة */
+        /* Default position for mobile/iPad (fixed to viewport for smooth floating) */
         #atom-bg {
-            position: absolute; /* Changed from fixed */
-            inset: 0;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: -10; /* أعمق طبقة */
             background: transparent;
         }
+
+        /* Override to absolute positioning (relative to document body) only for Desktop/XL Screens */
+        /* This prevents the atoms from being cut off if the page is extremely long on desktop */
+        @media (min-width: 1280px) {
+            #atom-bg {
+                position: absolute; 
+                height: auto; /* Managed by JS to cover content length */
+            }
+        }
+
 
         /* رفع المحتوى فوق الزينة */
         header, section, footer, .page-view {
@@ -1376,8 +1390,8 @@
                     numParticles = 100; // Less dense on mobile
                     speedFactor = 1.2; // Faster movement on mobile (1.2x default)
                 } else if (window.innerWidth < 1280) {
-                    numParticles = 120; // Medium density on iPad/Tablet
-                    speedFactor = 0.9; // Slightly faster movement on iPad/Tablet (0.9x default speed - original desktop was 0.7)
+                    numParticles = 100; // Reduced density further for slightly better performance on iPad
+                    speedFactor = 1.0; // Slightly faster movement on iPad/Tablet 
                 } else {
                     numParticles = 150; // Desktop density
                     speedFactor = 0.7; // Desktop speed
@@ -1386,8 +1400,14 @@
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
-                // Adjust height dynamically based on content height
-                canvas.height = Math.max(document.body.scrollHeight, window.innerHeight); 
+                // For desktop (>= 1280px), the height should cover the full content
+                if (window.innerWidth >= 1280) {
+                   canvas.height = Math.max(document.body.scrollHeight, window.innerHeight); 
+                } 
+                // For mobile/iPad (< 1280px), the height should cover only the viewport (due to fixed positioning)
+                else {
+                   canvas.height = window.innerHeight;
+                }
             }
 
             // Debounce function to limit resize handler calls
@@ -1453,11 +1473,9 @@
             let animationFrameId = null; // To control the animation loop
 
             function draw() {
-                // 1. Re-check canvas size dynamically for scrolling content (if needed)
-                if (canvas.height !== Math.max(document.body.scrollHeight, window.innerHeight)) {
-                    resizeCanvas();
-                }
-
+                // 1. Re-check canvas size dynamically
+                resizeCanvas(); 
+                
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 // 2. رسم الذرات
