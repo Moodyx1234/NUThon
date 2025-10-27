@@ -46,7 +46,6 @@
                 linear-gradient(0deg, transparent 9px, rgba(15, 23, 42, 0.02) 10px, transparent 11px), 
                 linear-gradient(90deg, transparent 9px, rgba(15, 23, 42, 0.02) 10px, transparent 11px);
             background-size: 50px 50px; 
-            /* تم إزالة background-attachment: fixed; */
         }
 
         /* Dark mode background pattern */
@@ -351,6 +350,7 @@
     </header>
 
     <!-- NEW: Mobile Dropdown Menu (Side Drawer) - (Visible on iPad/Mobile) -->
+    <div id="mobile-nav-overlay" onclick="toggleMobileDropdown()"></div>
     <div id="mobile-nav-dropdown" class="dark:bg-slate-900">
         <!-- Close Button at the top of the sidebar -->
         <div class="p-4 flex justify-between items-center border-b border-gray-700">
@@ -398,8 +398,7 @@
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
         </a>
     </div>
-    <!-- NEW: Mobile Nav Overlay (Dark background behind sidebar) -->
-    <div id="mobile-nav-overlay" onclick="toggleMobileDropdown()"></div>
+    
 
     <!-- 
         ========================================
@@ -1167,7 +1166,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- NEW: Telegram Contact Section (Unified Button) -->
         <!-- DARK MODE: dark:bg-blue-800 -->
         <section class="py-12 bg-blue-700 dark:bg-blue-800">
@@ -1254,7 +1253,7 @@
                 createDigitBox(seconds, 'ثانية');
         }
 
-        // Function to toggle the mobile menu dropdown (Side Drawer Logic)
+        // Function to toggle the mobile menu dropdown
         function toggleMobileDropdown() {
             const dropdown = document.getElementById('mobile-nav-dropdown');
             const overlay = document.getElementById('mobile-nav-overlay'); // Added overlay
@@ -1274,9 +1273,6 @@
         }
 
 
-        // Initialize Lucide icons
-        lucide.createIcons();
-
         // Function for smooth internal scrolling (used only on the landing page)
         function internalScroll(id) {
             const element = document.getElementById(id);
@@ -1287,19 +1283,20 @@
                 // Use getBoundingClientRect().top for relative position to viewport.
                 // Scroll to the element's position relative to the document top (window.pageYOffset + element.getBoundingClientRect().top)
                 // and subtract the header height (plus temporary padding of 20px)
+                // Reverting to -20 offset as requested for better visual positioning
                 const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight - 20; 
                 
                 window.scrollTo({
                     top: topPosition,
-                    behavior: 'smooth' 
+                    behavior: 'smooth' // This ensures the dynamic scrolling animation without 'glitching'
                 });
             }
             // Close mobile menu after clicking a link
             const dropdown = document.getElementById('mobile-nav-dropdown');
             const overlay = document.getElementById('mobile-nav-overlay');
             if (dropdown.classList.contains('open')) {
-                dropdown.classList.remove('open');
-                overlay.classList.remove('open');
+                 dropdown.classList.remove('open');
+                 overlay.classList.remove('open');
             }
         }
         
@@ -1387,27 +1384,29 @@
             
             // DEFAULT DENSITY (Keep original values as requested)
             let numParticles = 150; 
-            // DEFAULT MOVEMENT SPEED (Keep original values as requested)
+            // DEFAULT MOVEMENT SPEED (Set to 0.7 for all sizes for 'normal' speed, as requested)
             let speedFactor = 0.7; 
             
             const maxDistance = 250; 
             const maxRadius = 4; 
 
-            // Function to update settings based on screen size (using original logic)
+            // Function to update settings based on screen size (RESETTING SPEED TO 0.7)
             function updateParticleSettings() {
-                // Settings from the user's latest provided code (unmodified)
-                if (window.innerWidth < 1024) {
-                    numParticles = 100; // Less dense on mobile
-                    speedFactor = 1.2; // Faster movement on mobile
+                // Speed set to 0.7 globally for 'normal' speed
+                speedFactor = 0.7; 
+
+                if (window.innerWidth < 768) {
+                    numParticles = 100; 
+                } else if (window.innerWidth < 1280) {
+                    numParticles = 120; 
                 } else {
                      numParticles = 150; 
-                     speedFactor = 0.7; 
                 }
             }
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
-                // Height is always based on scrollHeight now because position is absolute
+                // Height is based on scrollHeight for absolute positioning (moves with scroll)
                 canvas.height = Math.max(document.body.scrollHeight, window.innerHeight); 
             }
 
@@ -1487,7 +1486,7 @@
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                     // Increased opacity for particle fill
-                    ctx.fillStyle = p.color + "55"; 
+                    ctx.fillStyle = p.color + "99"; 
                     ctx.fill();
                 }
 
