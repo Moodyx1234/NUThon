@@ -290,19 +290,20 @@
     <header id="main-header" class="bg-white shadow-lg sticky top-0 z-50 dark:bg-slate-800 dark:shadow-lg dark:shadow-gray-700/[.1]">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
             
-            <!-- 1. Logos & Menu Button Group (Right Side) -->
+            <!-- 1. Logos, Menu Button, and Theme Toggle Group (Right Side in RTL) -->
             <div class="flex items-center space-x-4 space-x-reverse">
-                
-                <!-- Mobile Menu Button (Hamburger) - Positioned left on mobile -->
-                <!-- DARK MODE: dark:text-gray-300 dark:hover:bg-gray-700 -->
-                <button onclick="toggleMobileDropdown()" class="xl:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition dark:text-gray-300 dark:hover:bg-gray-700">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
                 
                 <!-- Marathon Logo (Event Brand) -->
                 <a href="#" class="flex items-center">
                     <img src="شعار الماراثون.png" alt="شعار الماراثون العلمي الطلابي" class="marathon-logo w-auto shadow-md h-16">
                 </a>
+
+                <!-- NEW: Hamburger Menu near logo (ONLY on mobile/tablet) -->
+                <!-- تم وضع زر القائمة بجوار الشعار مباشرةً -->
+                <button onclick="toggleMobileDropdown()" class="xl:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition dark:text-gray-300 dark:hover:bg-gray-700">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+
             </div>
 
             <!-- 2. Navigation Links (Center on Desktop, Hidden on Mobile) -->
@@ -319,17 +320,18 @@
                 <a href="#faq" onclick="internalScroll('faq')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap dark:text-gray-300 dark:hover:text-white">الأسئلة الشائعة</a>
             </nav>
             
-            <!-- 3. Actions Group (Left Side) -->
+            <!-- 3. Actions Group (Left Side in RTL) -->
             <div class="flex items-center space-x-2 space-x-reverse">
                 
-                <!-- NEW: Theme Toggle Button (Mobile/Tablet - Appears in header) -->
-                <button id="theme-toggle-btn-mobile-header" onclick="toggleDarkMode()" class="xl:hidden text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <!-- Theme Toggle Button (Mobile/Tablet - Appears in header) -->
+                <!-- تم نقل زر المظهر ليكون بجانب زر التسجيل في الجوال/الآيباد -->
+                <button id="theme-toggle-btn-mobile-header" onclick="toggleDarkMode()" class="lg:hidden text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                     <i data-lucide="moon" class="w-5 h-5 moon-icon"></i>
                     <i data-lucide="sun" class="w-5 h-5 sun-icon"></i>
                 </button>
-                
+
                 <!-- Theme Toggle Button (Desktop/Large Tablet) -->
-                <button id="theme-toggle-btn-desktop" onclick="toggleDarkMode()" class="hidden xl:block text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <button id="theme-toggle-btn-desktop" onclick="toggleDarkMode()" class="hidden lg:block text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                     <i data-lucide="moon" class="w-5 h-5 moon-icon"></i>
                     <i data-lucide="sun" class="w-5 h-5 sun-icon"></i>
                 </button>
@@ -344,10 +346,7 @@
                     سجل الآن
                 </a>
                 
-                <!-- Mobile Menu Button (Hamburger) - Positioned left on mobile (Moved to the end) -->
-                <button onclick="toggleMobileDropdown()" class="xl:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
+                <!-- Removed the redundant hamburger menu button from the left side. -->
             </div>
             
         </div>
@@ -1398,16 +1397,13 @@
 
             // Function to update settings based on screen size (using original logic)
             function updateParticleSettings() {
-                // ADJUSTED values from the previous successful run (Keeping these as they were stable)
-                if (window.innerWidth < 768) {
-                    numParticles = 60; // Optimized for performance on small screen
-                    speedFactor = 1.2; 
-                } else if (window.innerWidth < 1280) {
-                    numParticles = 80; // Optimized for iPad performance
-                    speedFactor = 1.0; 
+                // Settings from the user's latest provided code (unmodified)
+                if (window.innerWidth < 1024) {
+                    numParticles = 100; // Less dense on mobile
+                    speedFactor = 1.2; // Faster movement on mobile
                 } else {
-                    numParticles = 150; 
-                    speedFactor = 0.7; 
+                     numParticles = 150; 
+                     speedFactor = 0.7; 
                 }
             }
 
@@ -1493,7 +1489,7 @@
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                     // Increased opacity for particle fill
-                    ctx.fillStyle = p.color + "99"; 
+                    ctx.fillStyle = p.color + "55"; 
                     ctx.fill();
                 }
 
