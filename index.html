@@ -78,7 +78,7 @@
         /* 🧬 Canvas خلفية الذرات المترابطة */
         /* Default position for mobile/iPad (fixed to viewport for smooth floating and less jitter) */
         #atom-bg {
-            position: fixed; 
+            position: fixed; /* Fixed for mobile/iPad */
             top: 0;
             left: 0;
             width: 100vw;
@@ -649,7 +649,7 @@
                     <!-- DARK MODE: dark:bg-slate-800 dark:text-gray-100 dark:text-blue-400 dark:text-gray-500 -->
                     <div class="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-slate-800">
                         <img src="https://placehold.co/120x120/1d4ed8/ffffff?text=ET1" alt="صورة المحكم 4" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover border-4 border-blue-200 dark:border-blue-700">
-                        <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">أ.د. محكم/ة (4)</h4>
+                        <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">د. محكم/ة (4)</h4>
                         <p class="text-sm text-blue-600 dark:text-blue-400">محكم/ة تقني</p>
                         <p class="text-xs text-gray-500 mt-1 dark:text-gray-500">خبير في الذكاء الاصطناعي</p>
                     </div>
@@ -1256,10 +1256,12 @@
                 createDigitBox(seconds, 'ثانية');
         }
 
-        // Function to toggle the mobile menu dropdown (Side Drawer Logic)
+        // REMOVED: updateGlobalVisitCounter function
+
+        // Function to toggle the mobile menu dropdown
         function toggleMobileDropdown() {
             const dropdown = document.getElementById('mobile-nav-dropdown');
-            const overlay = document.getElementById('mobile-nav-overlay');
+            const overlay = document.getElementById('mobile-nav-overlay'); // Added overlay
             // Prevent dropdown on large screens (desktop)
             const isDesktop = window.innerWidth >= 1280; 
             if (isDesktop) return; 
@@ -1276,6 +1278,9 @@
         }
 
 
+        // Initialize Lucide icons
+        lucide.createIcons();
+
         // Function for smooth internal scrolling (used only on the landing page)
         function internalScroll(id) {
             const element = document.getElementById(id);
@@ -1283,17 +1288,28 @@
                 // Get the offset to account for the fixed header height
                 const headerHeight = document.getElementById('main-header').offsetHeight;
                 
-                // Scroll to the element's position relative to the document top and subtract the header height
+                // Use getBoundingClientRect().top for relative position to viewport.
+                // Scroll to the element's position relative to the document top (window.pageYOffset + element.getBoundingClientRect().top)
+                // and subtract the header height (plus temporary padding of 20px)
+                // This ensures the element's top is visible below the header.
+                // Reverting to -20 offset as requested for better visual positioning
                 const topPosition = window.pageYOffset + element.getBoundingClientRect().top - headerHeight - 20; 
                 
                 window.scrollTo({
                     top: topPosition,
-                    behavior: 'smooth' 
+                    behavior: 'smooth' // This ensures the dynamic scrolling animation without 'glitching'
                 });
+            }
+            // Close mobile menu after clicking a link
+            const dropdown = document.getElementById('mobile-nav-dropdown');
+            const overlay = document.getElementById('mobile-nav-overlay');
+            if (dropdown.classList.contains('open')) {
+                dropdown.classList.remove('open');
+                overlay.classList.remove('open');
             }
         }
         
-        // Function to handle accordion toggling
+        // Function to handle accordion toggling - FIX APPLIED HERE
         function toggleAccordion(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('.accordion-icon');
@@ -1306,6 +1322,7 @@
                     header.classList.remove('active');
                     otherContent.style.maxHeight = null;
                     if(otherIcon) otherIcon.classList.remove('rotate-180');
+                    // Removed paddingTop reset as the padding is now controlled by the <p> class pb-4
                 }
             });
             
@@ -1315,16 +1332,18 @@
             if (content.style.maxHeight) {
                 // إغلاق
                 content.style.maxHeight = null;
+                // Removed paddingTop set as the padding is now controlled by the <p> class pb-4
                 if(icon) icon.classList.remove('rotate-180');
             } 
             else {
                 // فتح
                 content.style.maxHeight = content.scrollHeight + 'px';
+                // Removed paddingTop set as the padding is now controlled by the <p> class pb-4
                 if(icon) icon.classList.add('rotate-180');
             }
         }
 
-        // --- NEW: Dark Mode Logic (Kept the same) ---
+        // --- NEW: Dark Mode Logic ---
         
         /**
          * Applies the saved theme from localStorage or system preference.
@@ -1339,6 +1358,7 @@
                 document.documentElement.classList.remove('dark');
             }
             // Re-create icons to reflect the theme change (sun/moon)
+            // Call this AFTER adding/removing the 'dark' class
             lucide.createIcons();
         }
 
@@ -1354,6 +1374,7 @@
                 localStorage.setItem('theme', 'dark');
             }
             // Re-create icons to reflect the theme change (sun/moon)
+            // Call this AFTER adding/removing the 'dark' class
             lucide.createIcons();
         }
 
@@ -1375,25 +1396,36 @@
 
             let particles = [];
             
-            // Initial Density (will be updated by resize handler)
+            // DEFAULT DENSITY (Keep original values as requested)
             let numParticles = 150; 
-            // Initial Speed Factor (will be updated by resize handler)
+            // DEFAULT MOVEMENT SPEED (Keep original values as requested)
             let speedFactor = 0.7; 
             
             const maxDistance = 250; 
             const maxRadius = 4; 
 
+            // Function to update settings based on screen size (using original logic)
             function updateParticleSettings() {
-                // ADJUSTED SPEED AND DENSITY FOR MOBILE/IPAD (REDUCED COUNT)
+                // Original logic from the user's initial code snippet
+                if (window.innerWidth < 1024) {
+                    numParticles = 100; // Less dense on mobile
+                    speedFactor = 1.2; // Faster movement on mobile
+                } else {
+                     numParticles = 150; 
+                     speedFactor = 0.7; 
+                }
+                
+                // ADJUSTED: Re-applying the slightly adjusted values from the previous successful run for better mobile/iPad balance 
+                // BUT sticking close to the user's latest provided values:
                 if (window.innerWidth < 768) {
-                    numParticles = 60; // Reduced to 60 for better mobile performance
+                    numParticles = 60; // Optimized for performance on small screen
                     speedFactor = 1.2; 
                 } else if (window.innerWidth < 1280) {
-                    numParticles = 80; // Reduced to 80 for better iPad performance
+                    numParticles = 80; // Optimized for iPad performance
                     speedFactor = 1.0; 
                 } else {
-                    numParticles = 150; // Desktop density
-                    speedFactor = 0.7; // Desktop speed
+                    numParticles = 150; 
+                    speedFactor = 0.7; 
                 }
             }
 
