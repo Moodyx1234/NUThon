@@ -76,7 +76,7 @@
 
 
         /* 🧬 Canvas خلفية الذرات المترابطة */
-        /* Default position for mobile/iPad (fixed to viewport for smooth floating) */
+        /* Default position for mobile/iPad (fixed to viewport for smooth floating and less jitter) */
         #atom-bg {
             position: fixed; 
             top: 0;
@@ -88,7 +88,6 @@
         }
 
         /* Override to absolute positioning (relative to document body) only for Desktop/XL Screens */
-        /* This prevents the atoms from being cut off if the page is extremely long on desktop */
         @media (min-width: 1280px) {
             #atom-bg {
                 position: absolute; 
@@ -345,7 +344,7 @@
                 </a>
                 
                 <!-- Mobile Menu Button (Hamburger) - Positioned left on mobile (Moved to the end) -->
-                <button onclick="toggleMobileDropdown()" class="xl:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition dark:text-gray-300 dark:hover:bg-gray-700">
+                <button onclick="toggleMobileDropdown()" class="xl:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -1385,13 +1384,13 @@
             const maxRadius = 4; 
 
             function updateParticleSettings() {
-                // ADJUSTED SPEED AND DENSITY FOR MOBILE/IPAD
+                // ADJUSTED SPEED AND DENSITY FOR MOBILE/IPAD (REDUCED COUNT)
                 if (window.innerWidth < 768) {
-                    numParticles = 100; // Less dense on mobile
-                    speedFactor = 1.2; // Faster movement on mobile (1.2x default)
+                    numParticles = 60; // Reduced to 60 for better mobile performance
+                    speedFactor = 1.2; 
                 } else if (window.innerWidth < 1280) {
-                    numParticles = 100; // Reduced density further for slightly better performance on iPad
-                    speedFactor = 1.0; // Slightly faster movement on iPad/Tablet 
+                    numParticles = 80; // Reduced to 80 for better iPad performance
+                    speedFactor = 1.0; 
                 } else {
                     numParticles = 150; // Desktop density
                     speedFactor = 0.7; // Desktop speed
@@ -1473,8 +1472,10 @@
             let animationFrameId = null; // To control the animation loop
 
             function draw() {
-                // 1. Re-check canvas size dynamically
-                resizeCanvas(); 
+                // 1. Re-check canvas size dynamically ONLY FOR DESKTOP (where position is absolute)
+                if (window.innerWidth >= 1280) {
+                    resizeCanvas(); 
+                }
                 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
