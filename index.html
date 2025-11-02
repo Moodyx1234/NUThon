@@ -15,6 +15,19 @@
         // Tell Tailwind to use the 'dark' class on the <html> element
         tailwind.config = {
             darkMode: 'class',
+            theme: {
+                extend: {
+                    // Custom animation for spinning loader and button pulse
+                    keyframes: {
+                        spin: {
+                            to: { transform: 'rotate(360deg)' },
+                        },
+                    },
+                    animation: {
+                        spin: 'spin 1s linear infinite',
+                    },
+                },
+            },
         }
     </script>
     
@@ -54,7 +67,7 @@
         }
 
         /* ----------------------------------------------------------------- */
-        /* NEW: Custom Box Style for Total Rewards (مجموع الجوائز) */
+        /* Custom Box Style for Total Rewards (مجموع الجوائز) */
         /* ----------------------------------------------------------------- */
         .total-rewards-box {
             /* Light Mode Style */
@@ -280,6 +293,72 @@
             border-color: #7c3aed; /* Purple border in dark mode */
             box-shadow: 0 15px 30px rgba(124, 58, 237, 0.2);
         }
+        
+        /* ---------------------------------------------------- */
+        /* UPDATED: Workshop Status Button Styles */
+        /* ---------------------------------------------------- */
+        .workshop-status-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* Full rounded */
+            font-weight: 700;
+            font-size: 0.875rem; /* text-sm */
+            transition: all 0.3s ease-in-out; /* Smoother transitions */
+            width: fit-content;
+            margin-top: 1rem;
+            text-decoration: none; 
+            border: 2px solid transparent; /* Base border for all */
+        }
+
+        /* Status: Available (متاح) - Blue with accent pulse */
+        .status-available {
+            background-color: var(--color-secondary); /* Blue 700 */
+            color: white; 
+            border-color: var(--color-accent); /* Emerald border */
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.5); /* Emerald Glow */
+            cursor: pointer;
+            animation: glow-pulse 2s infinite ease-in-out;
+        }
+        .status-available:hover {
+            background-color: #1e40af; /* Blue 800 */
+            transform: scale(1.03);
+        }
+
+        /* Animation for Available button - Emerald Pulse */
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 0 10px rgba(52, 211, 153, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(52, 211, 153, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(52, 211, 153, 0.4); }
+        }
+
+        /* Status: Pending (قريبًا) - Subtle Purple, implies preparation */
+        .status-pending {
+            background-color: #8b5cf6; /* Violet 500 */
+            color: white;
+            border-color: #c4b5fd; /* Violet 300 lighter border */
+            opacity: 0.95;
+            cursor: default;
+        }
+
+        /* Status: Ended (منتهي) - Muted, dashed border to look final/archived */
+        .status-ended {
+            background-color: #f3f4f6; /* Gray 100 (Light Mode) */
+            color: #6b7280; /* Gray 500 */
+            border-color: #9ca3af; /* Gray 400 */
+            border-style: dashed;
+            opacity: 0.8;
+            cursor: default;
+            box-shadow: none;
+        }
+        
+        html.dark .status-ended {
+             background-color: #374151; /* Gray 700 Dark Mode */
+             color: #d1d5db; /* Gray 300 */
+             border-color: #4b5563; /* Gray 600 Dark Mode */
+        }
+        /* ---------------------------------------------------- */
 
     </style>
 </head>
@@ -701,48 +780,60 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
                     <!-- Workshop 1: المقدمة والمسارات (عام) -->
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                    <div id="workshop-1" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="book-check" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: مقدمة عن الماراثون ومساراته</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>الأستاذ/ فيصل الجوتر</strong> (عام وشامل)</p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً)</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: التعريف بالماراثون، استعراض المسارات، شرح آليات المشاركة والتقييم.</p>
+                        <!-- PLACEHOLDER FOR BUTTON - PENDING STATUS -->
+                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="1"></div>
                     </div>
 
                     <!-- Workshop 2: الملكية الفكرية (عام) -->
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                    <div id="workshop-2" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="monitor-dot" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: مجموعة ورش عمل متخصصة في الملكية الفكرية</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>الهيئة السعودية للملكية الفكرية</strong> (عام وشامل)</p>
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً)</strong></p>
+                        <!-- Set Status to AVAILABLE as an example (Replace with a real link) -->
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>25 ديسمبر 2025 | 7:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">الهدف: تعزيز الوعي بحقوق الملكية الفكرية وأهميتها في المشاريع الابتكارية للطلبة.</p>
+                        <!-- PLACEHOLDER FOR BUTTON - AVAILABLE STATUS -->
+                        <div data-workshop-status="available" data-workshop-link="https://meet.google.com/workshop-saip" data-workshop-id="2"></div>
                     </div>
 
                     <!-- Workshop 3: المسار الهندسي والتقني -->
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                    <div id="workshop-3" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="rocket" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: المسار الهندسي والتقني: من المشكلة إلى النموذج الأولي</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. عبدالله خلوفة</strong> (كلية الهندسة)</p>
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً) - مدة 2-3 ساعات</strong></p>
+                        <!-- Set Status to ENDED as an example -->
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>10 ديسمبر 2025 | 5:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تحليل المشكلة، صياغة الفرضية، التفكير الابتكاري، رسم النموذج الأولي (البروتوتايب).</p>
+                        <!-- PLACEHOLDER FOR BUTTON - ENDED STATUS -->
+                        <div data-workshop-status="ended" data-workshop-link="#" data-workshop-id="3"></div>
                     </div>
 
                     <!-- Workshop 4: المسار العلمي والإنساني -->
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                    <div id="workshop-4" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="shield-check" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: المسار العلمي والإنساني: ريادة الابتكار وإدارة المشاريع</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. ناصر الهمامي</strong> (كلية إدارة الأعمال)</p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً) - مدة 2-3 ساعات</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: قيادة الفريق الابتكاري، توزيع المهام، إدارة الوقت، تسليم النتائج.</p>
+                        <!-- PLACEHOLDER FOR BUTTON - PENDING STATUS -->
+                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="4"></div>
                     </div>
 
                     <!-- Workshop 5: المسار الصحي -->
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                    <div id="workshop-5" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="heart-handshake" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: المسار الصحي: الابتكار الصحي المبني على البحث</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. حسين آل عماد</strong> (كلية الطب البشري)</p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً) - مدة 2-3 ساعات</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: توظيف التفكير الابتكاري لتطوير حلول تُحسّن جودة الخدمات والرعاية الصحية.</p>
+                        <!-- PLACEHOLDER FOR BUTTON - PENDING STATUS -->
+                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="5"></div>
                     </div>
 
                 </div>
@@ -860,7 +951,7 @@
                         <!-- Entity 3: Douar Alriyadah (Square/Vertical Aspect) -->
                         <div class="partner-logo-container p-4 bg-white rounded-xl shadow-lg max-w-[12rem] flex items-center justify-center border-2 border-gray-200 hover:shadow-xl transition dark:bg-gray-100 dark:border-gray-700">
                             <!-- Image of Douar Alriyadah Logo (Placeholder) -->
-                            <img src="دور الريادة.png" alt="شعار دور الريادة" class="w-auto max-h-28">
+                            <img src="دور الريادة.png" alt="شعار دور الريادة">
                         </div>
                         
                     </div>
@@ -1021,7 +1112,7 @@
     </div>
     
     <script>
-        // Set the target date for the countdown (New date: 1 November 2025 at 00:00:00)
+        // Set the target date for the countdown (New date: 31 December 2025 at 00:00:00)
         const targetDate = new Date("2025-12-31T00:00:00").getTime();
         
         // Function to update the countdown
@@ -1172,13 +1263,78 @@
             lucide.createIcons();
         }
 
-        // --- End of Dark Mode Logic ---
+        // ----------------------------------------------------------------------
+        // NEW WORKSHOP BUTTON LOGIC
+        // ----------------------------------------------------------------------
+
+        // Function to generate the workshop button based on status
+        function createWorkshopButton(status, link) {
+            let text = '';
+            let icon = '';
+            let className = 'workshop-status-btn';
+            let href = '#';
+            let target = '';
+            // Increased spacing for the 'Pending' loader icon (ml-4 rtl:mr-4)
+            let iconClasses = 'w-4 h-4 ml-4 rtl:mr-0 rtl:ml-2';
+            
+            switch (status) {
+                case 'available':
+                    text = 'انضم للورشة الآن';
+                    icon = 'log-in';
+                    className += ' status-available';
+                    href = link;
+                    target = '_blank';
+                    break;
+                case 'ended':
+                    text = 'الورشة منتهية';
+                    icon = 'check-circle';
+                    className += ' status-ended';
+                    break;
+                case 'pending':
+                default:
+                    text = 'قريباً';
+                    icon = 'loader';
+                    className += ' status-pending';
+                    iconClasses += ' animate-spin'; // ADDED: Tailwind spin animation for loader
+                    break;
+            }
+
+            // Using event.preventDefault() for non-clickable buttons
+            const onClickAttr = (status === 'pending' || status === 'ended') ? `onclick="event.preventDefault();"` : '';
+
+            return `
+                <a href="${href}" target="${target}" ${onClickAttr} class="${className}">
+                    <i data-lucide="${icon}" class="${iconClasses}"></i>
+                    <span>${text}</span>
+                </a>
+            `;
+        }
+
+        // Function to inject buttons into the placeholders
+        function initializeWorkshopButtons() {
+            document.querySelectorAll('[data-workshop-status]').forEach(placeholder => {
+                const status = placeholder.getAttribute('data-workshop-status');
+                const link = placeholder.getAttribute('data-workshop-link');
+                
+                // Only inject if the placeholder is empty
+                if (!placeholder.innerHTML.trim()) {
+                    placeholder.innerHTML = createWorkshopButton(status, link);
+                }
+            });
+            // Re-create icons for the newly injected buttons
+            lucide.createIcons();
+        }
+
+        // ----------------------------------------------------------------------
 
 
         // Initial setup
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize theme first
             initializeTheme();
+            
+            // NEW: Initialize workshop buttons
+            initializeWorkshopButtons();
             
             // Run the countdown immediately and then every second
             updateCountdown();
@@ -1282,7 +1438,7 @@
             function draw() {
                 // Re-check canvas size dynamically for absolute positioning
                  if (canvas.height !== Math.max(document.body.scrollHeight, window.innerHeight)) {
-                     resizeCanvas(); 
+                      resizeCanvas(); 
                  }
                 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1349,8 +1505,8 @@
             // Function to stop the animation
             function stopAnimation() {
                  if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = null;
+                     cancelAnimationFrame(animationFrameId);
+                     animationFrameId = null;
                  }
             }
 
