@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الماراثون العلمي الطلابي - منصة التقديم</title>
-    <!-- IMPORTANT: Prevent search engines from indexing this private site -->
     <meta name="robots" content="noindex, nofollow">
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons CDN for modern, simple icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <script>
@@ -182,7 +179,7 @@
             z-index: 1; 
             opacity: 0.2;
             background-image: radial-gradient(circle, transparent 20%, rgba(52, 211, 153, 0.2) 21%),
-                              repeating-radial-gradient(circle, #34d399, #34d399 1px, transparent 2px, transparent 10%);
+                               repeating-radial-gradient(circle, #34d399, #34d399 1px, transparent 2px, transparent 10%);
             background-size: 50px 50px;
             mix-blend-mode: soft-light; /* Blends nicely with the dark overlay */
         }
@@ -360,36 +357,64 @@
         }
         /* ---------------------------------------------------- */
 
+        /* ----------------------------------------------------------------- */
+        /* START: NEW LOGO SWAP STYLING for Dark/Light Mode */
+        /* ----------------------------------------------------------------- */
+
+        /* Base style applied to both logos for consistent size (Replacing the inline tailwind classes) */
+        .marathon-logo-base {
+            width: auto; 
+            height: 4rem; /* h-16 equivalent (64px) */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md equivalent */
+        }
+
+        /* Default (Light Mode) Styling */
+        .logo-light {
+            display: block; /* Show light logo by default */
+        }
+        .logo-dark {
+            display: none; /* Hide dark logo by default */
+        }
+
+        /* Dark Mode Overrides (when html has class 'dark') */
+        html.dark .logo-light {
+            display: none; /* Hide light logo in dark mode */
+        }
+        html.dark .logo-dark {
+            display: block; /* Show dark logo in dark mode */
+        }
+        /* ----------------------------------------------------------------- */
+        /* END: NEW LOGO SWAP STYLING */
+        /* ----------------------------------------------------------------- */
+
     </style>
 </head>
 <body>
     
-    <!-- 🧬 Canvas خلفية الذرات المترابطة (مضافة هنا) -->
     <canvas id="atom-bg"></canvas>
 
-    <!-- Header & Navigation (Improved layout and centering) -->
     <header id="main-header" class="bg-white shadow-lg sticky top-0 z-50 dark:bg-slate-800 dark:shadow-lg dark:shadow-gray-700/[.1]">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
             
-            <!-- 1. Logos & Menu Button Group (Right Side in RTL) -->
             <div class="flex items-center space-x-4 space-x-reverse">
 
-                <!-- Hamburger Menu in extreme right (ONLY on mobile/tablet) -->
                 <button onclick="toggleMobileDropdown()" class="xl:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition dark:text-gray-300 dark:hover:bg-gray-700">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
                 
-                <!-- Marathon Logo (Event Brand) -->
                 <a href="#" class="flex items-center">
-                    <!-- Placeholder for Marathon Logo -->
-                    <img src="شعار الماراثون.png" alt="شعار الماراثون العلمي الطلابي" class="marathon-logo w-auto shadow-md h-16">
-                </a>
+                    <img src="شعار إنيوثون (light Mode).png" 
+                         alt="شعار الماراثون العلمي الطلابي - فاتح" 
+                         class="logo-light marathon-logo-base">
+
+                    <img src="شعار إنيوثون (Dark Mode).png" 
+                         alt="شعار الماراثون العلمي الطلابي - داكن" 
+                         class="logo-dark marathon-logo-base">
+                    </a>
                 
             </div>
 
-            <!-- 2. Navigation Links (Center on Desktop, Hidden on Mobile) -->
             <nav id="landing-nav" class="hidden xl:flex space-x-3 space-x-reverse lg:space-x-4 text-base font-medium absolute left-1/2 transform -translate-x-1/2">
-                <!-- DARK MODE: dark:text-gray-300 dark:hover:text-white -->
                 <a href="#tracks" onclick="internalScroll('tracks')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap dark:text-gray-300 dark:hover:text-white">المسارات</a>
                 <a href="#rewards" onclick="internalScroll('rewards')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap dark:text-gray-300 dark:hover:text-white">الجوائز</a>
                 <a href="#criteria" onclick="internalScroll('criteria')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap dark:text-gray-300 dark:hover:text-white">المعايير</a>
@@ -400,27 +425,22 @@
                 <a href="#faq" onclick="internalScroll('faq')" class="text-gray-600 hover:text-blue-700 transition duration-150 p-2 whitespace-nowrap dark:text-gray-300 dark:hover:text-white">الأسئلة الشائعة</a>
             </nav>
             
-            <!-- 3. Actions Group (Left Side in RTL) -->
             <div class="flex items-center space-x-2 space-x-reverse">
                 
-                <!-- NEW: Theme Toggle Button (Mobile/Tablet - Appears in header) -->
                 <button id="theme-toggle-btn-mobile-header" onclick="toggleDarkMode()" class="lg:hidden text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                     <i data-lucide="moon" class="w-5 h-5 moon-icon"></i>
                     <i data-lucide="sun" class="w-5 h-5 sun-icon"></i>
                 </button>
 
-                <!-- Theme Toggle Button (Desktop/Large Tablet) -->
                 <button id="theme-toggle-btn-desktop" onclick="toggleDarkMode()" class="hidden lg:block text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                     <i data-lucide="moon" class="w-5 h-5 moon-icon"></i>
                     <i data-lucide="sun" class="w-5 h-5 sun-icon"></i>
                 </button>
                 
-                <!-- Registration Button (Desktop Only) -->
                 <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=FWtNse63V0m7FLYQoZOkEBxTTWEyxtFLt5CN3QkrNQlUNUJKOUZQMEg3V0JFVU9ZOU1JVjM3SVdHUC4u" target="_blank" class="hidden lg:block px-5 py-2 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition shadow-lg shadow-blue-500/50 text-sm md:text-base dark:hover:bg-blue-600">
                     سجل الآن
                 </a>
                 
-                <!-- Registration Button (Mobile Only, next to theme toggle) -->
                 <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=FWtNse63V0m7FLYQoZOkEBxTTWEyxtFLt5CN3QkrNQlUNUJKOUZQMEg3V0JFVU9ZOU1JVjM3SVdHUC4u" target="_blank" class="lg:hidden px-3 py-1.5 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition shadow-lg text-sm dark:hover:bg-blue-600">
                     سجل الآن
                 </a>
@@ -430,18 +450,15 @@
         </div>
     </header>
 
-    <!-- NEW: Mobile Dropdown Menu (Side Drawer) - (Visible on iPad/Mobile) -->
     <div id="mobile-nav-overlay" onclick="toggleMobileDropdown()"></div>
     <div id="mobile-nav-dropdown" class="dark:bg-slate-900">
-        <!-- Close Button at the top of the sidebar -->
         <div class="p-4 flex justify-between items-center border-b border-gray-700">
-            <h3 class="text-lg font-bold text-white">قائمة الماراثون</h3>
+            <h3 class="text-lg font-bold text-white">قائمة NUThon</h3>
             <button onclick="toggleMobileDropdown()" class="text-gray-300 hover:text-white p-2 rounded-full transition">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
         
-        <!-- Navigation Links -->
         <a href="#tracks" onclick="internalScroll('tracks'); toggleMobileDropdown();">
             <span>المسارات</span>
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
@@ -477,31 +494,22 @@
     </div>
     
 
-    <!--  
-        ========================================
-        LANDING PAGE VIEW (Default View)
-        ========================================
-    -->
     <div id="landing-view" class="page-view">
-        <!-- Hero Section - New Style with Image Background -->
         <section id="top" class="hero-bg text-white pt-24 pb-16 md:pt-32 md:pb-24">
             <div class="container mx-auto px-4 text-center relative z-20">
                 <h2 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
-                    أطلق فكرتك الابتكارية في <span class="text-emerald-400">الماراثون العلمي الطلابي الثاني في جامعة نجران</span>
+                    أطلق فكرتك الابتكارية في <span class="text-emerald-400">NUThon في جامعة نجران</span>
                 </h2>
                 <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                    ماراثون موجه لطلاب جامعة نجران لتقديم المشاريع الإبتكارية مبتكرة في المسارات المستقبلية.
+                    إنيوثون موجه لطلاب جامعة نجران لتقديم المشاريع الإبتكارية مبتكرة في المسارات المستقبلية.
                 </p>
                 
-                <!-- Countdown Timer - Prominent -->
                 <div id="countdown" class="flex justify-center space-x-4 space-x-reverse mb-6 text-center">
-                    <!-- Digits will be populated by JS -->
-                </div>
+                    </div>
                 <p id="countdown-status" class="text-lg font-medium text-emerald-400 mb-10">
-                    متبقي على بدء الماراثون (التسجيل يغلق مع بدء الماراثون).
+                    متبقي على إنتهاء التسجيل.
                 </p>
 
-                <!-- Registration Button -->
                 <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=FWtNse63V0m7FLYQoZOkEBxTTWEyxtFLt5CN3QkrNQlUNUJKOUZQMEg3V0JFVU9ZOU1JVjM3SVdHUC4u" target="_blank" class="inline-flex items-center space-x-2 space-x-reverse px-10 py-4 bg-emerald-400 text-gray-900 text-xl font-bold rounded-xl hover:bg-emerald-500 transition duration-300 transform hover:scale-105 shadow-xl shadow-emerald-400/70">
                     <span>سجل لتقديم مشروعك الابتكاري</span>
                     <i data-lucide="arrow-left" class="w-6 h-6"></i>
@@ -509,7 +517,6 @@
             </div>
         </section>
 
-        <!-- Tracks Section (المسارات) -->
         <section id="tracks" class="py-16 md:py-24 relative z-10"> 
             <div class="container mx-auto px-4 relative z-10"> 
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-4 dark:text-white">مسارات الماراثون</h3>
@@ -517,7 +524,6 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                     
-                    <!-- Track 1: Health (الصحي) -->
                     <div class="bg-gray-50 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-b-8 border-red-600/70 transform hover:translate-y-[-5px] dark:bg-slate-800 dark:border-red-500">
                         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4 shadow-inner dark:bg-red-900/50 dark:text-red-400">
                             <i data-lucide="heart-pulse" class="w-8 h-8"></i>
@@ -526,7 +532,6 @@
                         <p class="text-gray-600 text-lg dark:text-gray-400">المشاريع الإبتكارية المتعلقة بتحسين الرعاية الصحية، التشخيص، والعلاج باستخدام أحدث المناهج.</p>
                     </div>
                     
-                    <!-- Track 2: Engineering & Technology (الهندسي والتقني) -->
                     <div class="bg-gray-50 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-b-8 border-blue-600/70 transform hover:translate-y-[-5px] dark:bg-slate-800 dark:border-blue-500">
                         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 mb-4 shadow-inner dark:bg-blue-900/50 dark:text-blue-400">
                             <i data-lucide="cog" class="w-8 h-8"></i>
@@ -535,7 +540,6 @@
                         <p class="text-gray-600 text-lg dark:text-gray-400">المشاريع الابتكارية في الذكاء الاصطناعي، الأمن السيبراني، الهندسة، الأنظمة المستدامة، وحلول البنية التحتية.</p>
                     </div>
 
-                    <!-- Track 3: Humanities & Science (الإنساني والعلمي) -->
                     <div class="bg-gray-50 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-b-8 border-green-600/70 transform hover:translate-y-[-5px] dark:bg-slate-800 dark:border-green-500">
                         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4 shadow-inner dark:bg-green-900/50 dark:text-green-400">
                             <i data-lucide="book-open-text" class="w-8 h-8"></i>
@@ -547,57 +551,46 @@
             </div>
         </section>
 
-        <!-- Rewards Section (الجوائز والمكافآت) -->
         <section id="rewards" class="py-16 md:py-24 relative z-10">
             <div class="container mx-auto px-4">
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-8 dark:text-white">الجوائز والمكافآت</h3>
 
-                <!-- Prize money announcement - WITH NEW BOX STYLE -->
                 <div class="text-center">
                     <div class="total-rewards-badge mb-10">
                         <span class="text-xl md:text-2xl font-extrabold total-rewards-box">مجموع الجوائز يصل إلى: SAR 40,000</span>
                     </div>
-                    <!-- FIX: Reduced text size to md and applied whitespace-nowrap on large screens to fit one line -->
                     <p class="text-center text-base md:text-xl text-gray-600 mb-10 max-w-4xl mx-auto whitespace-nowrap hidden xl:block dark:text-gray-400">
                         تُمنح الجوائز التالية للفائزين في المراكز الثلاثة الأولى لكل مسار في تحدي المشاريع الإبتكارية.
                     </p>
-                    <!-- Mobile view (allows wrapping) -->
                     <p class="text-center text-base text-gray-600 mb-10 max-w-2xl mx-auto xl:hidden dark:text-gray-400">
                         تُمنح الجوائز التالية للفائزين في المراكز الثلاثة الأولى لكل مسار في تحدي المشاريع الإبتكارية.
                     </p>
                 </div>
 
 
-                <!-- Using grid for responsive layout and custom order on desktop -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center items-end">
                     
-                    <!-- Reward 1st Place (Gold) - Order 1 on Mobile, Order 2 on Desktop (via CSS) -->
                     <div class="reward-1st reward-card bg-white p-6 rounded-2xl shadow-2xl transition duration-300 border-4 border-yellow-500 relative z-10 dark:bg-slate-800 dark:border-yellow-500">
-                        <!-- Trophy Icon 1st Place - Larger Size -->
                         <i data-lucide="trophy" class="w-20 h-20 text-yellow-500 mx-auto mb-4 fill-yellow-500 stroke-2"></i>
                         <div>
                             <h4 class="text-3xl font-extrabold text-gray-900 mb-2 dark:text-gray-100">المركز الأول</h4>
-                            <span class="text-4xl font-mono text-yellow-600 dark:text-yellow-500">SAR 3000</span>
+                            <span class="text-4xl font-mono text-yellow-600 dark:text-yellow-500">SAR 5000</span>
                         </div>
                     </div>
 
-                    <!-- Reward 2nd Place (Silver) - Order 2 on Mobile, Order 1 on Desktop (via CSS) -->
                     <div class="reward-2nd reward-card bg-white p-6 rounded-2xl shadow-xl transition duration-300 border-2 border-gray-400 dark:bg-slate-800 dark:border-gray-500">
-                        <!-- Trophy Icon 2nd Place -->
                         <i data-lucide="trophy" class="w-16 h-16 text-gray-500 mx-auto mb-4 fill-gray-400 stroke-2"></i>
                         <div>
                             <h4 class="text-3xl font-extrabold text-gray-900 mb-2 dark:text-gray-100">المركز الثاني</h4>
-                            <span class="text-4xl font-mono text-gray-600 dark:text-gray-400">SAR 2000</span>
+                            <span class="text-4xl font-mono text-gray-600 dark:text-gray-400">SAR 3000</span>
                         </div>
                     </div>
                     
-                    <!-- Reward 3rd Place (Bronze) - Order 3 on Mobile, Order 3 on Desktop (via CSS) -->
                     <div class="reward-3rd reward-card bg-white p-6 rounded-2xl shadow-xl transition duration-300 border-2 border-orange-500 dark:bg-slate-800 dark:border-orange-500">
-                        <!-- Trophy Icon 3rd Place -->
                         <i data-lucide="trophy" class="w-16 h-16 text-orange-600 mx-auto mb-4 fill-orange-500 stroke-2"></i>
                         <div>
                             <h4 class="text-3xl font-extrabold text-gray-900 mb-2 dark:text-gray-100">المركز الثالث</h4>
-                            <span class="text-4xl font-mono text-orange-600 dark:text-orange-500">SAR 1500</span>
+                            <span class="text-4xl font-mono text-orange-600 dark:text-orange-500">SAR 2000</span>
                         </div>
                     </div>
 
@@ -605,7 +598,6 @@
             </div>
         </section>
 
-        <!-- NEW: Criteria Section (معايير التحكيم) -->
         <section id="criteria" class="py-16 md:py-24 relative z-10"> 
             <div class="container mx-auto px-4 max-w-4xl relative z-10"> 
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12 dark:text-white">معايير التحكيم للمشاريع الابتكارية</h3>
@@ -613,7 +605,6 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
-                    <!-- Criterion 1: Research Quality -->
                     <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-r-4 border-emerald-400 flex items-start space-x-4 space-x-reverse dark:bg-slate-800 dark:border-emerald-600">
                         <i data-lucide="feather" class="w-8 h-8 text-emerald-600 dark:text-emerald-500 mt-1 flex-shrink-0"></i>
                         <div>
@@ -622,7 +613,6 @@
                         </div>
                     </div>
 
-                    <!-- Criterion 2: Clarity and Structure -->
                     <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-r-4 border-emerald-400 flex items-start space-x-4 space-x-reverse dark:bg-slate-800 dark:border-emerald-600">
                         <i data-lucide="scan" class="w-8 h-8 text-emerald-600 dark:text-emerald-500 mt-1 flex-shrink-0"></i>
                         <div>
@@ -631,7 +621,6 @@
                         </div>
                     </div>
 
-                    <!-- Criterion 3: Impact -->
                     <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-r-4 border-emerald-400 flex items-start space-x-4 space-x-reverse dark:bg-slate-800 dark:border-emerald-600">
                         <i data-lucide="trending-up" class="w-8 h-8 text-emerald-600 dark:text-emerald-500 mt-1 flex-shrink-0"></i>
                         <div>
@@ -640,7 +629,6 @@
                         </div>
                     </div>
 
-                    <!-- Criterion 4: Presentation -->
                     <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-r-4 border-emerald-400 flex items-start space-x-4 space-x-reverse dark:bg-slate-800 dark:border-emerald-600">
                         <i data-lucide="layout-dashboard" class="w-8 h-8 text-emerald-600 dark:text-emerald-500 mt-1 flex-shrink-0"></i>
                         <div>
@@ -653,15 +641,12 @@
             </div>
         </section>
 
-        <!-- New Schedule Section (البرنامج الزمني) -->
         <section id="schedule" class="py-16 md:py-24 relative z-10">
             <div class="container mx-auto px-4 max-w-5xl">
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12 dark:text-white">البرنامج الزمني للماراثون</h3>
                 
-                <!-- Row 1: Stages 1, 2, 3, 4 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     
-                    <!-- Item 1: فتح التسجيل (Start of Process) - UPDATED CONTENT -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-emerald-400 dark:bg-slate-800 dark:border-emerald-600">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="calendar-check" class="w-6 h-6 text-emerald-600 dark:text-emerald-500 flex-shrink-0"></i>
@@ -672,7 +657,6 @@
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">إتاحة رابط التسجيل للفرق وبدء استقبال المشاريع الإبتكارية.</p>
                     </div>
                     
-                    <!-- Item 2: بداية الورش (Activity) -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-blue-500 dark:bg-slate-800 dark:border-blue-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="activity" class="w-6 h-6 text-blue-600 dark:text-blue-500 flex-shrink-0"></i>
@@ -683,7 +667,6 @@
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">بداية الورش التدريبية والإشراف على الفرق أثناء إعداد المشاريع الإبتكارية.</p>
                     </div>
 
-                    <!-- Item 3: إغلاق التسجيل (New Stage) -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-red-500 dark:bg-slate-800 dark:border-red-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="calendar-x" class="w-6 h-6 text-red-600 dark:text-red-500 flex-shrink-0"></i>
@@ -694,7 +677,6 @@
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">إغلاق رابط التسجيل والتوقف عن استقبال المشاريع الإبتكارية.</p>
                     </div>
                     
-                    <!-- Item 4: فرز النتائج الأولية (Screening) - Shifted one stage down -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-yellow-500 dark:bg-slate-800 dark:border-yellow-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="scan" class="w-6 h-6 text-yellow-600 dark:text-yellow-500 flex-shrink-0"></i>
@@ -706,9 +688,7 @@
                     </div>
                 </div>
 
-                <!-- Row 2: Stages 5, 6, 7, 8 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <!-- Item 5: إرسال القبول الرسمي (Notification) - Shifted one stage down -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 dark:bg-slate-800 dark:border-indigo-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="mail-check" class="w-6 h-6 text-indigo-600 dark:text-indigo-500 flex-shrink-0"></i>
@@ -719,7 +699,6 @@
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">إرسال إشعارات القبول الرسمية للفرق المتأهلة.</p>
                     </div>
 
-                    <!-- Item 6: تدشين الحدث (Competition/Trophy) - Shifted one stage down -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-red-500 dark:bg-slate-800 dark:border-red-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="trophy" class="w-6 h-6 text-red-600 dark:text-red-500 flex-shrink-0"></i>
@@ -730,7 +709,6 @@
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">اليوم الأول للحدث الحضوري والفعاليات الماراثون (خاص بالبنين).</p>
                     </div>
                     
-                    <!-- Item 7: فعاليات اليوم الثاني (Competition/Trophy) - Shifted one stage down -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-red-500 dark:bg-slate-800 dark:border-red-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="trophy" class="w-6 h-6 text-red-600 dark:text-red-500 flex-shrink-0"></i>
@@ -741,7 +719,6 @@
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">اليوم الثاني للحدث الحضوري وفعاليات الماراثون (خاص بالبنات).</p>
                     </div>
                     
-                    <!-- Item 8: التحكيم النهائي (Competition/Trophy) - Shifted one stage down -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-red-500 dark:bg-slate-800 dark:border-red-500">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="trophy" class="w-6 h-6 text-red-600 dark:text-red-500 flex-shrink-0"></i>
@@ -753,9 +730,7 @@
                     </div>
                 </div>
 
-                <!-- Row 3: Stage 9 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Item 9: الحفل الختامي (Party/End) - Shifted one stage down -->
                     <div class="schedule-card bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-emerald-400 dark:bg-slate-800 dark:border-emerald-600">
                         <div class="flex items-center space-x-3 space-x-reverse mb-3">
                             <i data-lucide="party-popper" class="w-6 h-6 text-emerald-600 dark:text-emerald-500 flex-shrink-0"></i>
@@ -770,83 +745,120 @@
             </div>
         </section>
 
-        <!-- NEW: Workshops Section (ورش العمل والتدريب) -->
         <section id="workshops" class="py-16 md:py-24 relative z-10">
-            <div class="container mx-auto px-4 max-w-4xl">
+            <div class="container mx-auto px-4 max-w-5xl">
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12 dark:text-white">ورش العمل والتدريب</h3>
-                <p class="text-center text-xl text-gray-600 mb-8 max-w-2xl mx-auto dark:text-gray-400">سيتم عقد ورش عمل متخصصة للفرق لتمكينها من تطوير مشاريعها الابتكارية:</p>
+                <p class="text-center text-xl text-gray-600 mb-8 max-w-3xl mx-auto dark:text-gray-400">سيتم عقد ورش عمل متخصصة للفرق لتمكينها من تطوير مشاريعها الابتكارية.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- Workshop 1: المقدمة والمسارات (عام) -->
                     <div id="workshop-1" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="book-check" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
-                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: مقدمة عن الماراثون ومساراته</h4>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">رحلة الإبداع في NUThon</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أ. فيصل الجوتر</strong> (عام وشامل)</p>
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً)</strong></p>
-                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: التعريف بالماراثون، استعراض المسارات، شرح آليات المشاركة والتقييم.</p>
-                        <!-- PLACEHOLDER FOR BUTTON - PENDING STATUS -->
-                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="1"></div>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>18 نوفمبر 2025 | 7:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: التعريف بNUThon، استعراض المسارات، شرح آليات المشاركة والتقييم.</p>
+                        <div data-workshop-status="pending" data-workshop-link="https://meet.google.com/workshop-intro" data-workshop-id="1"></div>
                     </div>
 
-                    <!-- Workshop 2: الملكية الفكرية (عام) -->
                     <div id="workshop-2" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="monitor-dot" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
-                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: مجموعة ورش عمل متخصصة في الملكية الفكرية</h4>
-                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>الهيئة السعودية للملكية الفكرية</strong> (عام وشامل)</p>
-                        <!-- Set Status to AVAILABLE as an example (Replace with a real link) -->
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>25 ديسمبر 2025 | 7:00م</strong></p>
-                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">الهدف: تعزيز الوعي بحقوق الملكية الفكرية وأهميتها في المشاريع الابتكارية للطلبة.</p>
-                        <!-- PLACEHOLDER FOR BUTTON - AVAILABLE STATUS -->
-                        <div data-workshop-status="available" data-workshop-link="https://meet.google.com/workshop-saip" data-workshop-id="2"></div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">قدّمها كما تراها</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>المبتكر: الحسن رزق آل قارح</strong> (عام وشامل)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>19 نوفمبر 2025 | 4:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: أساسيات براءة الاختراع وحقوق التصميم والنماذج الصناعية، وكيفية حماية الابتكارات الطلابية.</p>
+                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="2"></div>
                     </div>
 
-                    <!-- Workshop 3: المسار الهندسي والتقني -->
                     <div id="workshop-3" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="rocket" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
-                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: المسار الهندسي والتقني: من المشكلة إلى النموذج الأولي</h4>
-                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. عبدالله خلوفة</strong> (كلية الهندسة)</p>
-                        <!-- Set Status to ENDED as an example -->
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>10 ديسمبر 2025 | 5:00م</strong></p>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">مقدمة عن حقوق المؤلف</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أ. عبدالعزيز الفايز</strong> (هيئة السعودية للملكية الفكرية)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>23 نوفمبر 2025 | 1:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تحليل المشكلة، صياغة الفرضية، التفكير الابتكاري، رسم النموذج الأولي (البروتوتايب).</p>
-                        <!-- PLACEHOLDER FOR BUTTON - ENDED STATUS -->
-                        <div data-workshop-status="ended" data-workshop-link="#" data-workshop-id="3"></div>
+                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="3"></div>
                     </div>
 
-                    <!-- Workshop 4: المسار العلمي والإنساني -->
                     <div id="workshop-4" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="shield-check" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
-                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: المسار العلمي والإنساني: ريادة الابتكار وإدارة المشاريع</h4>
-                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. ناصر الهمامي</strong> (كلية إدارة الأعمال)</p>
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً) - مدة 2-3 ساعات</strong></p>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">مقدمة عن التصاميم في سوق العمل  السعوي</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أ. خالد العريج</strong> (هيئة السعودية للملكيةالفكرية)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>26 نوفمبر 2025 | 1:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: قيادة الفريق الابتكاري، توزيع المهام، إدارة الوقت، تسليم النتائج.</p>
-                        <!-- PLACEHOLDER FOR BUTTON - PENDING STATUS -->
-                        <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="4"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://meet.google.com/workshop-sci-hum" data-workshop-id="4"></div>
                     </div>
 
-                    <!-- Workshop 5: المسار الصحي -->
                     <div id="workshop-5" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
                         <i data-lucide="heart-handshake" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
-                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">عنوان الورشة: المسار الصحي: الابتكار الصحي المبني على البحث</h4>
-                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. حسين آل عماد</strong> (كلية الطب البشري)</p>
-                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">التاريخ والوقت: <strong>(تحدد لاحقاً) - مدة 2-3 ساعات</strong></p>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">من الفكرة إلى المشروع: إدارة الفرق البحثية والابتكارية</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. ناصر الهمامي</strong> (دكتوراة في الإدارة العامة الحديثة)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>10 ديسمبر 2025 | 8:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: توظيف التفكير الابتكاري لتطوير حلول تُحسّن جودة الخدمات والرعاية الصحية.</p>
-                        <!-- PLACEHOLDER FOR BUTTON - PENDING STATUS -->
                         <div data-workshop-status="pending" data-workshop-link="#" data-workshop-id="5"></div>
+                    </div>
+                    
+                    <div id="workshop-6" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                        <i data-lucide="presentation" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">مسار الابتكار: من الأفكار الإبداعية إلى الابتكار التطبيقي</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. حسين آل عماد</strong> (زمالة الابتكار وتطوير النظم الصحية)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>14 ديسمبر 2025 | 2:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: إعداد العرض التقديمي الفعّال، كيفية التعامل مع لجنة التحكيم، أسرار العرض الناجح.</p>
+                        <div data-workshop-status="pending" data-workshop-link="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=workshop6-form" data-workshop-id="6"></div>
+                    </div>
+
+                    <div id="workshop-7" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                        <i data-lucide="presentation" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">استخدام التقنيات الحديثة في الهندسة</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. عبدالله خلوفة</strong> (دكتوراة في الهندسة الكهربائية)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>15 ديسمبر 2025 | 6:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: إعداد العرض التقديمي الفعّال، كيفية التعامل مع لجنة التحكيم، أسرار العرض الناجح.</p>
+                        <div data-workshop-status="pending" data-workshop-link="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=workshop6-form" data-workshop-id="6"></div>
+                    </div>
+
+                    <div id="workshop-8" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                        <i data-lucide="presentation" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">كيف تجد فكرتك الريادية؟</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>منشآت</strong> (منشآت)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-emerald-600 dark:text-emerald-400">حضوري (قاعة رقم 1 - مكتبة الأمير مشعل بن عبدالله)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>21 يناير 2026 | 2:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: إعداد العرض التقديمي الفعّال، كيفية التعامل مع لجنة التحكيم، أسرار العرض الناجح.</p>
+                    </div>
+
+                    <div id="workshop-9" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                        <i data-lucide="presentation" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">نموذج العمل التجاري (1)</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>منشآت</strong> (منشآت)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-emerald-600 dark:text-emerald-400">حضوري (قاعة رقم 1 - مكتبة الأمير مشعل بن عبدالله)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>21 يناير 2026 | 2:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: إعداد العرض التقديمي الفعّال، كيفية التعامل مع لجنة التحكيم، أسرار العرض الناجح.</p>
+                    </div>
+
+                    <div id="workshop-10" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition dark:bg-slate-800 dark:border-purple-600">
+                        <i data-lucide="presentation" class="w-8 h-8 text-purple-600 dark:text-purple-500 mb-3"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">نموذج العمل التجاري (2)</h4>
+                        <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>منشآت</strong> (منشآت)</p>
+                        <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-emerald-600 dark:text-emerald-400">حضوري (قاعة رقم 1 - مكتبة الأمير مشعل بن عبدالله)</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>21 يناير 2026 | 2:00م</strong></p>
+                        <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: قيادة الفريق الابتكاري، توزيع المهام، إدارة الوقت، تسليم النتائج..</p>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- Terms and Conditions Section (الشروط والأحكام) -->
         <section id="terms" class="py-16 md:py-24 relative z-10">
             <div class="container mx-auto px-4 max-w-4xl">
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12 dark:text-white">الشروط والأحكام والموافقة على المشاركة</h3>
 
                 <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300">
                     
-                    <!-- Dedication and Commitment -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="clock-4" class="w-6 h-6 text-blue-500"></i>
@@ -855,7 +867,6 @@
                         <p>يشترط على جميع المشاركين الالتزام الكامل بالتفرغ خلال فترة تنفيذ الماراثون لضمان الاستفادة القصوى من البرنامج وتحقيق الأهداف المرجوة.</p>
                     </div>
 
-                    <!-- Eligibility - HIGHLIGHTED -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="graduation-cap" class="w-6 h-6 text-blue-500"></i>
@@ -864,7 +875,6 @@
                         <p>يُسمح فقط بمشاركة طلاب البكالوريوس بجامعة نجران في تحدي المشاريع الإبتكارية.</p>
                     </div>
 
-                    <!-- Team Formation -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="users" class="w-6 h-6 text-blue-500"></i>
@@ -873,7 +883,6 @@
                         <p>يشترط تشكيل فريق مكون من 3 إلى 5 أشخاص فقط (لا يزيد أو يقل عن ذلك)، ويشمل هذا العدد قائد الفريق. لا يُسمح بالتسجيل الفردي.</p>
                     </div>
 
-                    <!-- Data Responsibility and Accuracy -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="clipboard-list" class="w-6 h-6 text-blue-500"></i>
@@ -882,7 +891,6 @@
                         <p>يكون قائد الفريق مسؤولًا عن تقديم بيانات الفريق والفرقة عبر رابط التسجيل الخاص بالماراثون. يُقرّ المشاركون بصحة كافة البيانات المقدمة، ويحق للجهة المسؤولة استبعاد أي مشارك أو فريق في حال ثبوت تقديم معلومات مضللة.</p>
                     </div>
 
-                    <!-- Originality and Innovation -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="lightbulb" class="w-6 h-6 text-blue-500"></i>
@@ -891,7 +899,6 @@
                         <p>يجب أن تكون المشاريع المقدمة أصلية ومبتكرة، ومتوافقة مع أهداف الماراثون ومساراته المحددة. الأفكار غير الأصلية سيتم استبعادها مباشرةً.</p>
                     </div>
 
-                    <!-- Evaluation Criteria -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="gauge" class="w-6 h-6 text-blue-500"></i>
@@ -900,7 +907,6 @@
                         <p>يتم تقييم الأفكار وفق معايير محددة ومعلنة. يتم ترشيح الفرق بناءً على النتائج التي تحققها في هذا التقييم، وتعتبر قرارات لجنة التحكيم نهائية.</p>
                     </div>
 
-                    <!-- Media Consent -->
                     <div class="p-6 bg-white rounded-xl shadow-lg border-r-4 border-blue-700 dark:bg-slate-800 dark:border-blue-500">
                         <h4 class="font-bold text-xl text-blue-700 mb-2 flex items-center space-x-2 space-x-reverse dark:text-blue-400">
                             <i data-lucide="camera" class="w-6 h-6 text-blue-500"></i>
@@ -913,43 +919,32 @@
             </div>
         </section>
 
-        <!-- Partners Section (الشركاء) -->
         <section id="partners" class="py-16 md:py-24 relative z-10">
             <div class="container mx-auto px-4 max-w-4xl text-center">
                 <h3 class="text-4xl font-bold text-gray-900 mb-12 dark:text-white">الشركاء</h3>
                 
-                <!-- 1. Strategic Partner (الشريك الاستراتيجي) - IMPROVED STYLE -->
                 <div class="mb-12 border-b pb-8 dark:border-gray-700">
                     <h4 class="text-2xl font-bold text-blue-700 mb-6 dark:text-blue-400">الشريك الاستراتيجي</h4>
                     <div class="flex justify-center items-center">
-                        <!-- UNIVERSITY LOGO (Vertical Aspect) -->
                         <div class="partner-logo-container strategic-partner-logo max-w-[15rem] flex items-center justify-center flex-col">
-                            <!-- Image of Najran University Logo (Placeholder) -->
                             <img src="najran_university_logo.webp" alt="شعار جامعة نجران" class="w-auto max-h-32">
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Participating Entities (الجهات المشاركة) -->
                 <div class="mb-8 pb-8 dark:border-gray-700">
                     <h4 class="text-2xl font-bold text-blue-700 mb-8 dark:text-blue-400">شركاء النجاح</h4>
                     <div class="flex flex-wrap justify-center items-center gap-10">
                         
-                        <!-- Entity 1: Monsha'at (Horizontal/Square Aspect) -->
                         <div class="partner-logo-container p-4 bg-white rounded-xl shadow-lg max-w-xs flex items-center justify-center border-2 border-gray-200 hover:shadow-xl transition dark:bg-gray-100 dark:border-gray-700">
-                            <!-- Image of Monsha'at Logo (Placeholder) -->
                             <img src="منشآت.png" alt="شعار منشآت" class="w-auto max-h-28">
                         </div>
 
-                        <!-- Entity 2: SAIP - Adjusted for horizontal logo -->
                         <div class="partner-logo-container p-4 bg-white rounded-xl shadow-lg max-w-md flex items-center justify-center border-2 border-gray-200 hover:shadow-xl transition dark:bg-gray-100 dark:border-gray-700">
-                            <!-- Image of Saudi Authority for Intellectual Property Logo (Placeholder) -->
                             <img src="هيئة الملكية الفكرية.png" alt="شعار الهيئة السعودية للملكية الفكرية" class="w-auto max-h-28 max-w-full">
                         </div>
 
-                        <!-- Entity 3: Douar Alriyadah (Square/Vertical Aspect) -->
                         <div class="partner-logo-container p-4 bg-white rounded-xl shadow-lg max-w-[12rem] flex items-center justify-center border-2 border-gray-200 hover:shadow-xl transition dark:bg-gray-100 dark:border-gray-700">
-                            <!-- Image of Douar Alriyadah Logo (Placeholder) -->
                             <img src="دور الريادة.png" alt="شعار دور الريادة" class="w-auto max-h-28 max-w-full">
                         </div>
 
@@ -958,14 +953,12 @@
             </div>
         </section>
 
-        <!-- FAQ Section (الأسئلة الشائعة) -->
         <section id="faq" class="py-16 md:py-24 relative z-10">
             <div class="container mx-auto px-4 max-w-4xl">
                 <h3 class="text-4xl font-bold text-center text-gray-900 mb-12 dark:text-white">الأسئلة الشائعة</h3>
 
                 <div class="space-y-4">
                     
-                    <!-- FAQ Item 1 (Modified) -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>من يمكنه التسجيل وما هي شروط الأهلية لتحدي المشاريع الإبتكارية؟</span>
@@ -976,7 +969,6 @@
                         </div>
                     </div>
 
-                    <!-- FAQ Item 2 (Existing) -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>هل يمكنني التسجيل بشكل فردي؟</span>
@@ -987,7 +979,6 @@
                         </div>
                     </div>
 
-                    <!-- FAQ Item 3 (Existing) -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>ما هي معايير تقييم الأفكار؟</span>
@@ -998,7 +989,6 @@
                         </div>
                     </div>
 
-                    <!-- FAQ Item 4 (Existing) -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>ماذا يحدث بعد تقديم الطلب؟</span>
@@ -1009,7 +999,6 @@
                         </div>
                     </div>
 
-                    <!-- NEW FAQ Item 5 -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>ما هي المدة الزمنية لتنفيذ المشروع في الماراثون؟</span>
@@ -1020,7 +1009,6 @@
                         </div>
                     </div>
 
-                    <!-- NEW FAQ Item 6 -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>هل يتم توفير دعم فني أو إشراف للفرق؟</span>
@@ -1031,7 +1019,6 @@
                         </div>
                     </div>
 
-                    <!-- NEW FAQ Item 7 -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>ما هي الجوائز المقدمة للفرق الفائزة؟</span>
@@ -1042,7 +1029,6 @@
                         </div>
                     </div>
                     
-                    <!-- NEW FAQ Item 8 -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden dark:bg-slate-800">
                         <button class="accordion-header flex justify-between items-center w-full p-5 text-right font-semibold text-gray-800 hover:bg-gray-50 transition duration-150 dark:text-gray-200 dark:hover:bg-slate-700" onclick="toggleAccordion(this)">
                             <span>أين ستُقام العروض النهائية للفرق؟</span>
@@ -1057,17 +1043,14 @@
             </div>
         </section>
 
-        <!-- NEW: Telegram Contact Section (Unified Button) -->
         <section class="py-12 bg-blue-700 dark:bg-blue-800">
             <div class="container mx-auto px-4 text-center">
                 
-                <!-- NEW: Informative Text -->
                 <h3 class="text-2xl font-bold text-white mb-3">القناة الرسمية للتواصل والمساعدة</h3>
                 <p class="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
                     للحصول على آخر الإعلانات، الاستفسارات المباشرة، وتكوين الفرق البحثية (إيجاد أعضاء)، انضم إلى قناة الماراثون على تليجرام.
                 </p>
 
-                <!-- Unified Button: Contact, Announcements, Team Formation -->
                 <a 
                     href="https://t.me/+zBdxsQTGhn8zY2Q0"
                     target="_blank"
@@ -1080,7 +1063,6 @@
         </section>
 
 
-        <!-- Footer for Landing View -->
         <footer id="landing-footer" class="bg-gray-900 text-white py-8 dark:bg-gray-900">
             <div class="container mx-auto px-4 text-center text-sm">
                 <p>&copy; 2025 الماراثون العلمي الطلابي. جميع الحقوق محفوظة.</p>
@@ -1424,9 +1406,9 @@
 
             function draw() {
                 // Re-check canvas size dynamically for absolute positioning
-                 if (canvas.height !== Math.max(document.body.scrollHeight, window.innerHeight)) {
-                      resizeCanvas(); 
-                 }
+                     if (canvas.height !== Math.max(document.body.scrollHeight, window.innerHeight)) {
+                            resizeCanvas(); 
+                       }
                 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
