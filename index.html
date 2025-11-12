@@ -742,7 +742,7 @@
                 </p>
                 
                 <div class="flex flex-col items-center w-full md:w-5/12 lg:w-4/12 mt-4 md:mt-0 flex-shrink-0 md:order-1">
-                    <div id="countdown" class="grid grid-cols-4 gap-x-2 gap-y-3 md:gap-x-4 w-full mx-auto mb-2">
+                    <div id="countdown" class="grid grid-cols-4 gap-x-2 gap-y-3 md:gap-x-6 w-full mx-auto mb-2">
                         </div>
                     <p id="countdown-status" class="text-lg font-500 text-nu-accent text-center">
                         متبقي على بدء التسجيل
@@ -1340,10 +1340,10 @@
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // *تعديل: تم تقليل حجم خط الآيباد من 5xl إلى 4xl لمنع الخروج عن الإطار*
+    // *تعديل: تم تقليل حجم خط الآيباد إلى text-3xl لضمان عدم الخروج عن الإطار*
     const createDigitBox = (value, label) => `
         <div class="countdown-digit p-3 md:p-4 lg:p-5 rounded-xl w-full"> 
-            <div class="text-4xl md:text-4xl lg:text-6xl font-mono font-bold">${String(value).padStart(2, '0')}</div>
+            <div class="text-4xl md:text-3xl lg:text-6xl font-mono font-bold">${String(value).padStart(2, '0')}</div>
             <div class="text-xs md:text-sm mt-1 text-gray-300">${label}</div>
         </div>
     `;
