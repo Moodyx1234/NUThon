@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NUThon - منصة التقديم</title>
-    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="icon" href="icon.png" type="image/png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="icon(dark mode).png" type="image/png" media="(prefers-color-scheme: dark)">
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,23 +19,23 @@
         // (تم ضبطها بناءً على الوقت الحالي: 12 نوفمبر، 10:57م)
         const WORKSHOP_UTC_DATES = {
             // (1) حالة "منتهية" - تم تحديدها أمس (11 نوفمبر)
-            '1': "2025-11-18T18:30:00Z", 
+            '1': "2025-11-18T18:30:00+03:00", 
 
             // (2) حالة "انضم الآن" - تم تحديدها اليوم 10:30م (19:30 UTC)
             // (بما أن الوقت 10:57م، فهو يقع ضمن نافذة الـ 4 ساعات)
-            '2': "2025-11-19T15:30:00Z", 
+            '2': "2025-11-19T15:30:00+03:00", 
 
             // (3) حالة "قريباً" - تم تحديدها غداً (13 نوفمبر)
-            '3': "2025-11-23T12:30:00Z",
+            '3': "2025-11-23T12:30:00+03:00",
             
             // (بقية الورش ستظهر "قريباً" أيضاً)
-            '4': "2025-11-26T12:30:00Z", 
-            '5': "2025-12-10T19:30:00Z", 
-            '6': "2025-12-14T13:30:00Z", 
-            '7': "2025-12-15T17:30:00Z", 
-            '8': "2026-01-25T11:00:00Z", 
-            '9': "2026-01-26T11:00:00Z", 
-            '10': "2026-01-27T11:00:00Z",
+            '4': "2025-11-26T12:30:00+03:00", 
+            '5': "2025-12-10T19:30:00+03:00", 
+            '6': "2025-12-14T13:30:00+03:00", 
+            '7': "2025-12-15T17:30:00+03:00", 
+            '8': "2026-01-25T11:00:00+03:00", 
+            '9': "2026-01-26T11:00:00+03:00", 
+            '10': "2026-01-27T11:00:00+03:00",
         };
 
 
