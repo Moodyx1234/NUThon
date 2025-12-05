@@ -30,12 +30,13 @@
             
             // (بقية الورش ستظهر "قريباً" أيضاً)
             '4': "2025-11-26T12:30:00+03:00", 
-            '5': "2025-12-10T19:30:00+03:00", 
-            '6': "2025-12-14T13:30:00+03:00", 
-            '7': "2025-12-15T17:30:00+03:00", 
-            '8': "2026-01-25T11:00:00+03:00", 
-            '9': "2026-01-26T11:00:00+03:00", 
-            '10': "2026-01-27T11:00:00+03:00",
+            '5': "2025-12-08T09:00:00+03:00", 
+            '6': "2025-12-09T09:00:00+03:00", 
+            '7': "2025-12-10T09:00:00+03:00", 
+            '8': "2025-12-10T19:30:00+03:00", 
+            '9': "2025-12-11T09:00:00+03:00", 
+            '10': "2025-12-14T13:30:00+03:00",
+            '11': "2025-12-15T20:00:00+03:00",
         };
 
 
@@ -50,6 +51,8 @@
                         'nu-primary': '#163d6a',     // كحلي/أزرق داكن (للنصوص الداكنة والمكونات)
                         'nu-secondary': '#078394',   // أزرق مائل للأخضر (أساسي)
                         'nu-accent': '#daac58',      // أصفر/ذهبي (التمييز)
+                        'nu-accent-light': '#fcc26f', // أصفر/ذهبي فاتح (بديل التمييز في Light Mode)
+                        'nu-accent-dark': '#b5892f', // أصفر/ذهبي داكن (بديل التمييز في Dark Mode)
                         'nu-purple': '#36b7c3',      // أزرق فاتح (بديل التمييز في Dark Mode)
                         'nu-light-bg': '#ebf4f6',    // رمادي فاتح (لون الخلفية في Light Mode)
                         // ألوان الخط الزمني - تم استخدام فئات Tailwind المدمجة (مثل emerald-400) بشكل مباشر لتكون أكثر مرونة
@@ -366,6 +369,14 @@
         .status-available:hover {
             background-color: #056a79; /* تظليل أغمق للأزرق المائل للأخضر */
             transform: scale(1.03);
+        }
+
+        .status-record {
+            background-color: #163d6a; /* رمادي متوسط */
+            color: white;
+            border-color: #3e6086; /* تظليل أفتح للرمادي */
+            opacity: 0.95;
+            cursor: default;
         }
 
         .status-pending {
@@ -995,7 +1006,7 @@
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>18 نوفمبر 2025 | 7:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تهدف إلى تعريف المشاركين بأهداف البرنامج ومحاوره وآلية التسجيل والتحكيم، وتمكينهم من فهم مراحل العمل من الفكرة حتى العرض النهائي للمشاركة الفعّالة.</p>
-                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/4448618b96d04d959f9a7661e314f606" data-workshop-id="1"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/4448618b96d04d959f9a7661e314f606" data-workshop-id="1" data-recording-link="https://nejranuniversity-my.sharepoint.com/:v:/g/personal/hthalawani_nu_edu_sa/IQBF646oYYkYRobT0wiRvgmPAW7jRiVq0YOolOOYCsnwPlc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=fPPQGz"></div>
                     </div>
 
                     <div id="workshop-2" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
@@ -1005,7 +1016,7 @@
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>19 نوفمبر 2025 | 8:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تهدف الورشة إلى مساعدة المشاركين في عرض أفكارهم الإبداعية بصريًا ولفظيًا، وبناء عرض تقديمي متكامل يعزز مهارات الإقناع والتواصل الفعّال.</p>
-                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/46e411a5ae1446caa671612126ee2cbe" data-workshop-id="2"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/46e411a5ae1446caa671612126ee2cbe" data-workshop-id="2" data-recording-link="https://nejranuniversity-my.sharepoint.com/:v:/g/personal/hthalawani_nu_edu_sa/IQClHgwsc_W2SZVk1djVgKhcAX5vz_8NkZGVlx3Kt31vFEI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=2LDApp"></div>
                     </div>
 
                     <div id="workshop-3" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
@@ -1015,7 +1026,7 @@
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>23 نوفمبر 2025 | 1:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تسعى لتعريف المشاركين بمفاهيم الملكية الفكرية وحقوق المؤلف والتشريعات الدولية، وفهم أنواع المصنفات والاستثناءات وطرق التسجيل الاختياري.</p>
-                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/ca8c47ee9e044270be2cbaae63d9f995" data-workshop-id="3"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/ca8c47ee9e044270be2cbaae63d9f995" data-workshop-id="3" data-recording-link="https://nejranuniversity-my.sharepoint.com/:v:/g/personal/hthalawani_nu_edu_sa/IQAoNxdXHjehSpQ9QICKul-dAaMyfYNmx7ek18AA11yGjdQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=OwYz9O"></div>
                     </div>
 
                     <div id="workshop-4" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
@@ -1028,72 +1039,76 @@
                         <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/fce28cd9c5194e83a149f82cf3d91cfa" data-workshop-id="4"></div>
                     </div>
 
-                    <div id="workshop-8" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-5" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="search" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">كيف تجد فكرتك الريادية؟</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أكاديمية منشآت</strong></p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-nu-accent dark:text-nu-accent/80">حضوري (تحدد لاحقًا - مكتبة الأمير مشعل بن عبدالله)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>08 ديسمبر 2025 | 9:00ص</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تسعى الورشة إلى تمكين المشاركين من اكتشاف أفكار ريادية مبتكرة، وتحفيزهم على تحليل المشكلات واستلهام الحلول القابلة للتطبيق في السوق.</p>
+                        <div data-workshop-status="pending" data-workshop-type="in-person" data-workshop-link="" data-workshop-id="5"></div>
                     </div>
 
-                    <div id="workshop-9" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-6" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="trending-up" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">كيف تبني النموذج التجاري لمشروعك؟</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أكاديمية منشآت</strong></p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-nu-accent dark:text-nu-accent/80">حضوري (تحدد لاحقًا - مكتبة الأمير مشعل بن عبدالله)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>09 ديسمبر 2025 | 9:00ص</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تهدف الورشة لتمكين المشاركين من فهم نموذج العمل التجاري، وبناء القيمة المقترحة بناءً على الفئة المستهدفة، والتمييز بين القنوات والعلاقات، وتحديد مصادر الإيرادات وهيكلة التكاليف واختيار الشركاء المناسبين.</p>
+                        <div data-workshop-status="pending" data-workshop-type="in-person" data-workshop-link="" data-workshop-id="6"></div>
                     </div>
 
-                    <div id="workshop-9" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-7" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="trending-up" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">نموذج العمل التجاري</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أكاديمية منشآت</strong></p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-nu-accent dark:text-nu-accent/80">حضوري (تحدد لاحقًا - مكتبة الأمير مشعل بن عبدالله)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>10 ديسمبر 2026 | 9:00ص</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تهدف الورشة إلى تعريف المشاركين بعناصر نموذج العمل التجاري، وتطوير مهاراتهم في تصميم نموذج متكامل وتحليل الجدوى لتحويل الأفكار إلى مشاريع ريادية قابلة للنمو.</p>
+                        <div data-workshop-status="pending" data-workshop-type="in-person" data-workshop-link="" data-workshop-id="7"></div>
                     </div>
 
-                    <div id="workshop-5" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-8" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="users-round" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">من الفكرة إلى المشروع: إدارة الفرق البحثية والابتكارية</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. ناصر الهمامي</strong> (دكتوراة في الإدارة العامة الحديثة)</p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>10 ديسمبر 2025 | 8:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تركّز على تنمية مهارات العمل الجماعي وإدارة الوقت والمهام، وتمكين المشاركين من تحويل الأفكار إلى مشاريع ريادية وابتكارية قابلة للتطوير والتنفيذ.</p>
-                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/f656f53a8fd442ffae00e78f25098e32" data-workshop-id="5"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/f656f53a8fd442ffae00e78f25098e32" data-workshop-id="8"></div>
                     </div>
 
-                    <div id="workshop-10" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-9" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="bar-chart-3" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">كيف تعرض مشروعك الريادي؟</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>أكاديمية منشآت</strong></p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-nu-accent dark:text-nu-accent/80">حضوري (تحدد لاحقًا - مكتبة الأمير مشعل بن عبدالله)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>11 ديسمبر 2025 | 9:00ص</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تركز الورشة على تزويد رائد الأعمال بمهارات تصميم عرض تقديمي للمشروع بطريقة احترافية وجذابة، وكيفية إيصال الفكرة بوضوح وفعالية.</p>
+                        <div data-workshop-status="pending" data-workshop-type="in-person" data-workshop-link="" data-workshop-id="9"></div>
                     </div>
 
                     
                     
-                    <div id="workshop-6" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-10" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="lightbulb" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">مسار الابتكار: من الأفكار الإبداعية إلى الابتكار التطبيقي</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. حسين آل عماد</strong> (زمالة الابتكار وتطوير النظم الصحية)</p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
                         <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>14 ديسمبر 2025 | 2:00م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تهدف إلى مساعدة المشاركين في تطوير أفكارهم وتحويلها إلى ابتكار تطبيقي يخدم القطاع الصحي عبر مراحل التنفيذ والنمو المستمر.</p>
-                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/4409217f7e6a4759a46b55e0f5763614" data-workshop-id="6"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/4409217f7e6a4759a46b55e0f5763614" data-workshop-id="10"></div>
                     </div>
 
-                    <div id="workshop-7" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
+                    <div id="workshop-11" class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-nu-purple hover:shadow-xl transition dark:bg-slate-800 dark:border-nu-purple/70">
                         <i data-lucide="cog" class="w-8 h-8 text-nu-purple dark:text-nu-purple/80 mb-3"></i>
                         <h4 class="text-xl font-bold text-gray-900 mb-1 dark:text-gray-100">استخدام التقنيات الحديثة في الهندسة</h4>
                         <p class="text-gray-600 text-base font-semibold dark:text-gray-400">يقدمها: <strong>د. عبدالله خلوفة</strong> (دكتوراة في الهندسة الكهربائية)</p>
                         <p class="text-sm text-gray-700 mt-1 font-medium dark:text-gray-300">المكان: <strong class="text-red-600 dark:text-red-400">عن بعد (افتراضية)</strong></p>
-                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>15 ديسمبر 2025 | 6:00م</strong></p>
+                        <p class="text-sm text-gray-700 font-medium dark:text-gray-300">التاريخ والوقت: <strong>15 ديسمبر 2025 | 8:30م</strong></p>
                         <p class="text-xs text-gray-500 mt-2 dark:text-gray-500">المحاور: تسعى لتعريف المشاركين بأحدث التقنيات الرقمية في الهندسة وتنمية مهارات اختيار التقنية المناسبة وتطبيق الحلول المبتكرة عمليًا.</p>
-                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/c1393206994f410389081555e48dd214" data-workshop-id="7"></div>
+                        <div data-workshop-status="pending" data-workshop-link="https://eu.bbcollab.com/guest/c1393206994f410389081555e48dd214" data-workshop-id="11"></div>
                     </div>
 
                 </div>
@@ -1466,36 +1481,49 @@
         // (الكود المحدث والنهائي لتحديد حالة الورشة)
         // ----------------------------------------------------------------------
 
-        // (هذه الدالة صحيحة وتتضمن نافذة الـ 4 ساعات)
-        function getWorkshopStatus(workshopDateTime) {
-            const now = new Date().getTime(); 
+        // ----------------------------------------------------------------------
+        // دالة تحديد حالة الورشة (محدثة لدعم الحالة الحضورية)
+        // ----------------------------------------------------------------------
+        function getWorkshopStatus(workshopDateTime, type) {
+            const now = new Date().getTime();
             const workshopTime = new Date(workshopDateTime).getTime();
 
-            // 1. وقت البدء: هو نفس وقت الورشة المحدد
-            const startWindow = workshopTime; 
-            // 2. وقت الإغلاق: 4 ساعات بعد وقت البدء
-            const endWindow = workshopTime + (4 * 60 * 60 * 1000); 
+            // تحديد مدة الورشة: 5 ساعات للحضوري، و4 ساعات للأونلاين
+            const durationHours = (type === 'in-person') ? 5 : 4;
+            const endWindow = workshopTime + (durationHours * 60 * 60 * 1000);
 
+            // 1. إذا تجاوز الوقت الحالي وقت الانتهاء -> منتهية
             if (now >= endWindow) {
-                // إذا مر على الورشة 4 ساعات -> "منتهية"
                 return 'ended';
-            } else if (now >= startWindow && now <= endWindow) {
-                // إذا كان الوقت الحالي ضمن نافذة الـ 4 ساعات -> "متاحة"
-                return 'available';
-            } else { 
-                // إذا لم يبدأ وقت الورشة بعد -> "قريباً"
-                return 'pending';
+            }
+
+            // 2. إذا كانت الورشة محددة كـ "حضوري"
+            if (type === 'in-person') {
+                // ستبقى حالتها "حضوري" طالما لم ينتهِ الوقت (سواء بدأت أم لم تبدأ بعد)
+                return 'in-person';
+            }
+
+            // 3. المنطق العادي للورش المتبقية (أونلاين)
+            if (now >= workshopTime && now <= endWindow) {
+                return 'available'; // انضم الآن
+            } else {
+                return 'pending'; // قريباً
             }
         }
 
-        function createWorkshopButton(status, link) {
+        // ----------------------------------------------------
+        // دالة إنشاء الأزرار (محدثة لإضافة تصميم زر "حضوري")
+        // ----------------------------------------------------
+        function createWorkshopButton(status, link, recordingLink) {
+            let mainButton = '';
             let text = '';
             let icon = '';
-            let className = 'workshop-status-btn';
+            let className = 'workshop-status-btn !mt-0';
             let href = '#';
             let target = '';
             let iconClasses = 'w-4 h-4 ml-4 rtl:mr-0 rtl:ml-2';
-            
+            let onClickAttr = '';
+    
             switch (status) {
                 case 'available':
                     text = 'انضم للورشة الآن';
@@ -1504,31 +1532,60 @@
                     href = link;
                     target = '_blank';
                     break;
+
+                case 'in-person': // <-- الحالة الجديدة
+                    text = 'حضوري';
+                    icon = 'map-pin'; // أيقونة الموقع
+                    // نستخدم نفس تنسيق "قريباً" لكن بدون حركة التحميل، أو يمكن تخصيص لون آخر
+                    className += ' status-record'; 
+                    // جعل المؤشر يظهر كـ نص عادي لأنه لا يوجد رابط انضمام
+                    onClickAttr = 'onclick="event.preventDefault();"';
+                    break;
+
                 case 'ended':
                     text = 'الورشة منتهية';
                     icon = 'check-circle';
                     className += ' status-ended';
+                    onClickAttr = 'onclick="event.preventDefault();"';
                     break;
+
                 case 'pending':
                 default:
                     text = 'قريباً';
                     icon = 'loader';
                     className += ' status-pending';
                     iconClasses += ' animate-spin'; 
+                    onClickAttr = 'onclick="event.preventDefault();"';
                     break;
             }
 
-            const onClickAttr = (status === 'pending' || status === 'ended') ? `onclick="event.preventDefault();"` : '';
-
-            return `
+            // إنشاء الزر الأساسي
+            mainButton = `
                 <a href="${href}" target="${target}" ${onClickAttr} class="${className}">
                     <i data-lucide="${icon}" class="${iconClasses}"></i>
                     <span>${text}</span>
                 </a>
             `;
-        }
 
-        // (دالة التحديث الديناميكي - صحيحة)
+            // زر التسجيل للورش المنتهية
+            let recordingButton = '';
+            if (status === 'ended' && recordingLink && recordingLink.trim() !== "") {
+                recordingButton = `
+                    <a href="${recordingLink}" target="_blank" class="workshop-status-btn !mt-0 bg-nu-accent text-white hover:bg-nu-accent-dark hover:scale-105 border-nu-accent-light">
+                        <i data-lucide="video" class="${iconClasses}"></i>
+                 <span>الورشة المسجلة</span>        
+                    </a>
+                `;
+            }
+
+            return `<div class="flex flex-wrap items-center gap-2 mt-4">${mainButton}${recordingButton}</div>`;
+        }
+        // ----------------------------------------------------
+        // تحديث: دالة التحديث لقراءة رابط التسجيل من HTML
+        // ----------------------------------------------------
+        // ----------------------------------------------------
+        // دالة التحديث (محدثة لقراءة نوع الورشة)
+        // ----------------------------------------------------
         function updateAllWorkshopButtons() {
             document.querySelectorAll('[data-workshop-status]').forEach(placeholder => {
                 const parentCard = placeholder.closest('div[id^="workshop-"]');
@@ -1536,24 +1593,25 @@
 
                 const workshopId = parentCard.id.split('-')[1]; 
                 const link = placeholder.getAttribute('data-workshop-link');
-                
+                const recordingLink = placeholder.getAttribute('data-recording-link'); 
+        
+                // قراءة نوع الورشة (هل هي حضوري؟)
+                const workshopType = placeholder.getAttribute('data-workshop-type'); 
+
                 const workshopDateTime = WORKSHOP_UTC_DATES[workshopId]; 
-                
+        
                 let newStatus;
 
                 if (workshopDateTime) {
-                    newStatus = getWorkshopStatus(workshopDateTime);
+                    // نمرر النوع للدالة
+                    newStatus = getWorkshopStatus(workshopDateTime, workshopType);
                 } else {
                     newStatus = placeholder.getAttribute('data-workshop-status');
                 }
 
-                const oldStatus = placeholder.getAttribute('data-current-status');
-
-                if (newStatus !== oldStatus) {
-                    placeholder.innerHTML = createWorkshopButton(newStatus, link);
-                    placeholder.setAttribute('data-current-status', newStatus);
-                    lucide.createIcons(); 
-                }
+                placeholder.innerHTML = createWorkshopButton(newStatus, link, recordingLink);
+                placeholder.setAttribute('data-current-status', newStatus);
+                lucide.createIcons(); 
             });
         }
         // ----------------------------------------------------------------------
