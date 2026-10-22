@@ -24,6 +24,12 @@ The official website of **NUThon**, the hackathon of the Deanship of Student Aff
 
 HTML · Tailwind CSS · JavaScript · Lucide icons · GitHub Pages
 
+### Repository structure
+
+- `index.html`: the whole site, on one page
+- `assets/images/`: NUThon logos, partner logos, favicons and the hero background
+- `assets/docs/`: the participant guide (PDF) and the project presentation template (PPTX)
+
 ### Run locally
 
 Open `index.html` in a browser. No build step is needed.
@@ -49,6 +55,12 @@ Open `index.html` in a browser. No build step is needed.
 ### التقنيات
 
 HTML · Tailwind CSS · JavaScript · Lucide · GitHub Pages
+
+### محتوى المستودع
+
+- `index.html`: الموقع كامل في صفحة واحدة
+- `assets/images/`: شعارات إنيوثون وشعارات الشركاء والأيقونات وصورة الخلفية
+- `assets/docs/`: دليل المشاركة (PDF) وقالب عرض المشاريع (PPTX)
 
 ### التشغيل على جهازك
 
